@@ -959,6 +959,7 @@ class Theme extends BaseMinc\Theme {
                     ]
                 ]
           ];
+          App::i()->applyHookBoundTo($this, 'search.filters', [&$filters]);
           return $filters;
       }
 }
