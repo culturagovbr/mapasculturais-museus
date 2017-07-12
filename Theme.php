@@ -178,6 +178,10 @@ class Theme extends BaseMinc\Theme {
             $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
         });
 
+        //Seal relation hook. Metadados não listados no core podem ser impressos aqui
+        $app->hook('sealRelation.certificateText', function(&$mensagem, $relation){
+            $mensagem = str_replace("[musCod]",$relation->owner->mus_cod, $mensagem);
+        });
 
         // own
         $app->hook('POST(space.own)', function() use($app){
