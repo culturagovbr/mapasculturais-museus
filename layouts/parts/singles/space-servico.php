@@ -15,7 +15,7 @@
     <?php endif; ?>
 
     <?php if($this->isEditable() || $entity->emailPublico): ?>
-    <p><span class="label">Email para divulgação:</span> <span class="js-editable" data-edit="emailPublico" data-original-title="Email para divulgação" data-emptytext="Insira um email que será exibido publicamente"><?php echo $entity->emailPublico; ?></span></p>
+    <p><span class="label required">Email para divulgação:</span> <span class="js-editable" data-edit="emailPublico" data-original-title="Email para divulgação" data-emptytext="Insira um email que será exibido publicamente"><?php echo $entity->emailPublico; ?></span></p>
     <?php endif; ?>
 
     <?php if($this->isEditable()):?>
@@ -23,7 +23,7 @@
     <?php endif; ?>
 
     <?php if($this->isEditable() || $entity->telefonePublico): ?>
-    <p><span class="label">Telefone para divulgação:</span> <span class="js-editable js-mask-phone" data-edit="telefonePublico" data-original-title="Telefone para divulgação" data-emptytext="Insira um telefone que será exibido publicamente"><?php echo $entity->telefonePublico; ?></span></p>
+    <p><span class="label required">Telefone para divulgação:</span> <span class="js-editable js-mask-phone" data-edit="telefonePublico" data-original-title="Telefone para divulgação" data-emptytext="Insira um telefone que será exibido publicamente"><?php echo $entity->telefonePublico; ?></span></p>
     <?php endif; ?>
 
     <?php if($this->isEditable()):?>

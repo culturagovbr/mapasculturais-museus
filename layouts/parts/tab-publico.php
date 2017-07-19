@@ -19,7 +19,7 @@ $show_instalacoes = $this->isEditable() ||
     <div class="servico">
         <?php if($this->isEditable() || $entity->mus_status): ?>
         <p>
-            <span class="label">O Museu encontra-se:</span>
+            <span class="label required">O Museu encontra-se:</span>
             <span class="js-editable" data-edit="mus_status" data-original-title="Status do museu" data-emptytext="Selecione status do museu"><?php echo $entity->mus_status; ?></span>
         </p>
         <?php endif; ?>
@@ -39,7 +39,7 @@ $show_instalacoes = $this->isEditable() ||
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->horario): ?>
-            <p><span class="label">Horário de funcionamento: </span><span class="js-editable" data-edit="horario" data-original-title="Horário de Funcionamento" data-emptytext="Insira o horário de abertura e fechamento"><?php echo $entity->horario; ?></span></p>
+            <p><span class="label required">Horário de funcionamento: </span><span class="js-editable" data-edit="horario" data-original-title="Horário de Funcionamento" data-emptytext="Insira o horário de abertura e fechamento"><?php echo $entity->horario; ?></span></p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->mus_ingresso_cobrado || $entity->mus_ingresso_valor): ?>
@@ -47,7 +47,7 @@ $show_instalacoes = $this->isEditable() ||
         <?php endif; ?>
         <?php if($this->isEditable() || $entity->mus_ingresso_cobrado): ?>
             <p>
-                <span class="label">Entrada é cobrada:</span>
+                <span class="label required">Entrada é cobrada:</span>
                 <span class="js-editable" data-edit="mus_ingresso_cobrado" data-original-title="A entrada no museu é cobrada?" data-emptytext="Selecione"><?php echo $entity->mus_ingresso_cobrado; ?></span>
             </p>
         <?php endif; ?>
@@ -64,12 +64,12 @@ $show_instalacoes = $this->isEditable() ||
         <?php endif ?>
 
         <?php if($this->isEditable() || $entity->acessibilidade): ?>
-            <p><span class="label">Acessibilidade: </span><span class="js-editable" data-edit="acessibilidade" data-original-title="Acessibilidade"><?php echo $entity->acessibilidade; ?></span></p>
+            <p><span class="label required">Acessibilidade: </span><span class="js-editable" data-edit="acessibilidade" data-original-title="Acessibilidade"><?php echo $entity->acessibilidade; ?></span></p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->acessibilidade_fisica): ?>
             <p>
-                <span class="label">Acessibilidade física: </span>
+                <span class="label required">Acessibilidade física: </span>
                 <editable-multiselect entity-property="acessibilidade_fisica" empty-label="Selecione" allow-other="true" box-title="Acessibilidade física:"></editable-multiselect>
             </p>
         <?php endif; ?>
@@ -77,14 +77,14 @@ $show_instalacoes = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_acessibilidade_visual): ?>
         <p>
-            <span class="label">Acessibilidade para pessoas com deficiências auditivas e visuais: </span>
+            <span class="label required">Acessibilidade para pessoas com deficiências auditivas e visuais: </span>
             <editable-multiselect entity-property="mus_acessibilidade_visual" empty-label="Selecione" allow-other="true" box-title="Acessibilidade para pessoas com deficiências auditivas e visuais" help-text="O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e visuais?"></editable-multiselect>
         </p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->mus_servicos_atendimentoEstrangeiros): ?>
         <p>
-            <span class="label">Atendimento aos turistas estrangeiros:</span>
+            <span class="label required">Atendimento aos turistas estrangeiros:</span>
             <editable-multiselect entity-property="mus_servicos_atendimentoEstrangeiros" empty-label="Selecione" box-title="Atendimento ao turista estrangeiro" help-text="O museu possui recursos para atendimento de turistas estrangeiros, como sinalização, audioguia, folder etc. em outros idiomas?"></editable-multiselect>
         </p>
         <?php endif; ?>
@@ -111,7 +111,7 @@ $show_instalacoes = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_arquivo_possui): ?>
         <p>
-            <span class="label">O museu possui arquivo histórico?</span>
+            <span class="label required">O museu possui arquivo histórico?</span>
             <span class="js-editable" data-edit="mus_arquivo_possui" data-original-title="O museu possui arquivo histórico?" data-emptytext="Selecione">
                 <?php echo $entity->mus_arquivo_possui; ?>
             </span>
@@ -120,7 +120,7 @@ $show_instalacoes = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_arquivo_acessoPublico): ?>
         <p>
-            <span class="label">O arquivo tem acesso ao público?</span>
+            <span class="label required">O arquivo tem acesso ao público?</span>
             <span class="js-editable" data-edit="mus_arquivo_acessoPublico" data-original-title="O arquivo tem acesso ao público?" data-emptytext="Selecione">
                 <?php echo $entity->mus_arquivo_acessoPublico; ?>
             </span>
@@ -129,7 +129,7 @@ $show_instalacoes = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_biblioteca_possui): ?>
         <p>
-            <span class="label">O Museu possui biblioteca?</span>
+            <span class="label required">O Museu possui biblioteca?</span>
             <span class="js-editable" data-edit="mus_biblioteca_possui" data-original-title="O Museu possui biblioteca?" data-emptytext="Selecione">
                 <?php echo $entity->mus_biblioteca_possui; ?>
             </span>
@@ -138,7 +138,7 @@ $show_instalacoes = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_biblioteca_acessoPublico): ?>
         <p>
-            <span class="label">A biblioteca tem acesso ao público?</span>
+            <span class="label required">A biblioteca tem acesso ao público?</span>
             <span class="js-editable" data-edit="mus_biblioteca_acessoPublico" data-original-title="A biblioteca tem acesso ao público?" data-emptytext="Selecione">
                 <?php echo $entity->mus_biblioteca_acessoPublico; ?>
             </span>
@@ -147,7 +147,7 @@ $show_instalacoes = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_servicos_visitaGuiada): ?>
         <p>
-            <span class="label">O museu promove visitas guiadas?</span>
+            <span class="label required">O museu promove visitas guiadas?</span>
             <span class="js-editable" data-edit="mus_servicos_visitaGuiada" data-original-title="O museu promove visitas guiadas?" data-emptytext="Selecione">
                 <?php echo $entity->mus_servicos_visitaGuiada; ?>
             </span>
@@ -169,7 +169,7 @@ $show_instalacoes = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_atividade_pub_especif): ?>
             <p>
-                <span class="label">O museu realiza atividades educativas e culturais para públicos específicos?</span>
+                <span class="label required">O museu realiza atividades educativas e culturais para públicos específicos?</span>
                 <span class="js-editable" data-edit="mus_atividade_pub_especif" data-original-title="O museu realiza atividades educativas e culturais para públicos específicos?" data-emptytext="Selecione"><?php echo $entity->mus_atividade_pub_especif; ?></span>
             </p>
         <?php endif; ?>

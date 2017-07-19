@@ -296,6 +296,9 @@ class Theme extends BaseMinc\Theme {
                     'fechado' => 'Fechado',
                     'implantacao' => 'Em implantação',
                     'extinto' => 'Extinto'
+                ],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar o ano de abertura'),
                 ]
             ],
 
@@ -320,6 +323,7 @@ class Theme extends BaseMinc\Theme {
                 'label' => 'Ano de abertura',
                 'type' => 'int',
                 'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar o ano de abertura'),
                     'v::intVal()' => 'O ano de abertura deve ser um valor numérico inteiro'
                 ]
             ],
@@ -340,6 +344,9 @@ class Theme extends BaseMinc\Theme {
                     'Museu de território/Ecomuseu',
                     'Unidade de conservação da natureza',
                     'Jardim zoológico, botânico, herbário, oceanário ou planetário'
+                ],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar o tipo do museu')
                 ]
             ],
 
@@ -355,6 +362,9 @@ class Theme extends BaseMinc\Theme {
                     'Meios de comunicação e transporte',
                     'Produção de bens e serviços',
                     'Defesa e segurança pública',
+                ],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar a temática do museu')
                 ]
             ],
 
@@ -421,7 +431,10 @@ class Theme extends BaseMinc\Theme {
             'servicos_visitaGuiada' => [
                 'label' => 'O museu promove visitas guiadas?',
                 'type' => 'select',
-                'options' => [ 'sim', 'não']
+                'options' => [ 'sim', 'não'],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar se tem visitas guiadas')
+                ]
             ],
             'servicos_visitaGuiada_s' => [
                 'label' => 'Em caso positivo, especifique',
@@ -441,6 +454,9 @@ class Theme extends BaseMinc\Theme {
                     'Material de divulgação impresso',
                     'Audioguia',
                     'Guia, monitor e/ou mediador'
+                ],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar acessibilidade a estrangeiros')
                 ]
             ],
             'acessibilidade_visual' => [
@@ -454,22 +470,34 @@ class Theme extends BaseMinc\Theme {
                     'Obras e reproduções táteis',
                     'Tradutor de Linguagem Brasileira de Sinais (LIBRAS)',
                     'Texto/Etiquetas em braile com informações sobre os objetos expostos'
+                ],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar acessibilidade auditiva e visual')
                 ]
             ],
             'arquivo_possui' => [
                 'label' => 'O museu possui arquivo histórico?',
                 'type' => 'select',
-                'options' => [ 'sim', 'não']
+                'options' => [ 'sim', 'não'],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar se possui arquivo histórico')
+                ]
             ],
             'arquivo_acessoPublico' => [
                 'label' => 'O arquivo tem acesso ao público?',
                 'type' => 'select',
-                'options' => [ 'sim', 'não']
+                'options' => [ 'sim', 'não'],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar se tem acesso ao público')
+                ]
             ],
             'biblioteca_possui' => [
                 'label' => 'O Museu possui biblioteca?',
                 'type' => 'select',
-                'options' => [ 'sim', 'não']
+                'options' => [ 'sim', 'não'],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar se possui biblioteca')
+                ]
             ],
             'biblioteca_acessoPublico' => [
                 'label' => 'A biblioteca tem acesso ao público?',
@@ -478,6 +506,9 @@ class Theme extends BaseMinc\Theme {
                     '' => 'não se aplica',
                     'sim' => 'sim',
                     'não' => 'não',
+                ],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar se a biblioteca tem acesso ao público')
                 ]
             ],
 
@@ -528,7 +559,10 @@ class Theme extends BaseMinc\Theme {
             'ingresso_cobrado' => [
                 'label' => 'O ingresso ao museu é cobrado?',
                 'type' => 'select',
-                'options' => [ 'sim', 'não', 'contribuição voluntária']
+                'options' => [ 'sim', 'não', 'contribuição voluntária'],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar a cobrança de ingresso')
+                ]
             ],
 
             'ingresso_valor' => [
@@ -546,7 +580,10 @@ class Theme extends BaseMinc\Theme {
             'gestao_planoMuseologico' => [
                 'label' => 'O museu possui plano museológico?',
                 'type' => 'select',
-                'options' => ['sim', 'não']
+                'options' => ['sim', 'não'],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar o plano museológico')
+                ]
             ],
 
             'gestao_politicaAquisicao' => [
@@ -576,24 +613,42 @@ class Theme extends BaseMinc\Theme {
 
             'EnCorrespondencia_CEP' => [
                 'label' => 'CEP',
+                'validations' => array(
+                    'required' => \MapasCulturais\i::__('O CEP do endereço de correspondência é obrigatório')
+                )
             ],
             'EnCorrespondencia_Nome_Logradouro' => [
                 'label' => 'Logradouro',
+                'validations' => array(
+                    'required' => \MapasCulturais\i::__('O Logradouro do endereço de correspondência é obrigatório')
+                )
             ],
             'EnCorrespondencia_Num' => [
                 'label' => 'Número',
+                'validations' => array(
+                    'required' => \MapasCulturais\i::__('O Número do endereço de correspondência é obrigatório')
+                )
             ],
             'EnCorrespondencia_Complemento' => [
                 'label' => 'Complemento',
+                'validations' => array(
+                    'required' => \MapasCulturais\i::__('O Complemento do endereço de correspondência é obrigatório')
+                )
             ],
             'EnCorrespondencia_CaixaPostal' => [
                 'label' => 'Caixa Postal',
             ],
             'EnCorrespondencia_Bairro' => [
                 'label' => 'Bairro',
+                'validations' => array(
+                    'required' => \MapasCulturais\i::__('O Bairro do endereço de correspondência é obrigatório')
+                )
             ],
             'EnCorrespondencia_Municipio' => [
                 'label' => 'Município',
+                'validations' => array(
+                    'required' => \MapasCulturais\i::__('O Município do endereço de correspondência é obrigatório')
+                )
             ],
             'EnCorrespondencia_Estado' => [
                 'label' => 'Estado',
@@ -626,6 +681,9 @@ class Theme extends BaseMinc\Theme {
                     'SP'=>'São Paulo',
                     'SE'=>'Sergipe',
                     'TO'=>'Tocantins',
+                ),
+                'validations' => array(
+                    'required' => \MapasCulturais\i::__('O Estado do endereço de correspondência é obrigatório')
                 )
             ],
             'add_info' => [
@@ -638,6 +696,9 @@ class Theme extends BaseMinc\Theme {
                 'options' => [
                     's' => 'Sim',
                     'n' => 'Não'
+                ],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar atividades para públicos específicos')
                 ]
             ],
             'atividade_pub_especif_s' => [
@@ -911,6 +972,9 @@ class Theme extends BaseMinc\Theme {
                         'param' => 'mus_tipo_tematica',
                         'value' => 'IN({val})'
                     ],
+                    'validations' => [
+                        'required' => \MapasCulturais\i::__('É obrigatório informar o tipo do museu')
+                    ]
                 ],
                 'verificados' => [
                     'label' => $this->dict('search: verified results', false),
@@ -952,14 +1016,20 @@ class Theme extends BaseMinc\Theme {
                         'param' => 'esfera',
                         'value' => 'IN({val})'
                     ],
+                    'validations' => [
+                        'required' => \MapasCulturais\i::__('É obrigatório informar a esfera')
+                    ]
                 ],
                 [
                     'isInline' => false,
-                    'label' => 'Tipo de Esfera',
+                    'label' => 'Tipo de fera',
                     'placeholder' => 'Selecione o tipo da esfera',
                     'filter' => [
                         'param' => 'esfera_tipo',
                         'value' => 'IN({val})'
+                    ],
+                    'validations' => [
+                        'required' => \MapasCulturais\i::__('É obrigatório informar o tipo de esfera')
                     ]
                 ]
           ];

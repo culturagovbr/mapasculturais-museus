@@ -12,13 +12,17 @@ $show_tipologia = $this->isEditable() ||
 
 ?>
 <div id="tab-mais" class="aba-content new-tab">
+    
     <div class="servico">
         <?php if($this->isEditable() || $entity->esfera): ?>
-            <p class="esfera"><span class="label">Esfera: </span><span class="js-editable" data-edit="esfera" data-original-title="Esfera"><?php echo $entity->esfera; ?></span></p>
+            <p class="esfera">
+                <span class="label required">Esfera: </span>
+                <span class="js-editable" data-edit="esfera" data-original-title="Esfera"><?php echo $entity->esfera; ?></span>
+            </p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->esfera_tipo): ?>
-            <p class="esfera"><span class="label">Tipo de Esfera: </span><span class="js-editable" data-edit="esfera_tipo" data-original-title="Tipo de Esfera"><?php echo $entity->esfera_tipo; ?></span></p>
+            <p class="esfera"><span class="label required">Tipo de Esfera: </span><span class="js-editable" data-edit="esfera_tipo" data-original-title="Tipo de Esfera"><?php echo $entity->esfera_tipo; ?></span></p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->mus_esfera_tipo_federal): ?>
@@ -40,7 +44,7 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_abertura_ano): ?>
         <p>
-            <span class="label">Ano de abertura:</span>
+            <span class="label required">Ano de abertura:</span>
             <span class="js-editable" data-edit="mus_abertura_ano" data-original-title="Ano de abertura" data-emptytext="Informe">
                 <?php echo $entity->mus_abertura_ano; ?>
             </span>
@@ -146,7 +150,7 @@ $show_tipologia = $this->isEditable() ||
             </p>
             <p class="privado">
                 <span class="icon icon-private-info"></span>
-                <span class="label">Possui plano museológico?</span>
+                <span class="label required">Possui plano museológico?</span>
                 <span class="js-editable" data-edit="mus_gestao_planoMuseologico" data-original-title="O museu possui plano museológico?" data-emptytext="Selecione">
                     <?php echo $entity->mus_gestao_planoMuseologico; ?>
                 </span>
@@ -155,7 +159,7 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_tipo): ?>
             <p>
-                <span class="label">Tipo:</span>
+                <span class="label required">Tipo:</span>
                 <span class="js-editable" data-edit="mus_tipo" data-original-title="Tipo do museu" data-emptytext="Selecione">
                     <?php echo $entity->mus_tipo; ?>
                 </span>
@@ -201,7 +205,7 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_tipo_tematica): ?>
         <p>
-            <span class="label">Temática:</span>
+            <span class="label required">Temática:</span>
             <span class="js-editable" data-edit="mus_tipo_tematica" data-original-title="Temática do museu" data-emptytext="Selecione">
                 <?php echo $entity->mus_tipo_tematica; ?>
             </span>
