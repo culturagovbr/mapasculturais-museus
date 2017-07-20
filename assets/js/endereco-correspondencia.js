@@ -16,6 +16,7 @@ $(function(){
      * @return void
      */
     function setWarningsCount(){
+        //Listener da requisição ajax para salvar o museu
         $(document).ajaxComplete(function(){
             var tabsToWarn = getInactiveTabs();
             tabsToWarn = countWarningsPerTab(tabsToWarn);
@@ -24,7 +25,7 @@ $(function(){
                 var warnings = tabsToWarn[key].numberOfWarnings;
 
                 if(warnings > 0){
-                    var errorHtml = '<span class="danger hltip js-response-error" data-hltip-classes="hltip-danger">' + warnings + '</span>';
+                    var errorHtml = `<span id="tab-warning" title="Há ${warnings} erros nesta aba. Verifique e tente novamente." class="danger hltip js-response-error" data-hltip-classes="hltip-danger"></span>`;
                     $('#'+tabsToWarn[key].idTab).append(errorHtml);
                 }
             }
@@ -131,15 +132,6 @@ $(function(){
         concatena_enderco();
     });
 
-    function setValidationErrorsDisplay(){
-        $('<div/>', {
-            id: 'foo',
-            rel: 'external',
-            text: 'Go to Google!',
-            style: 'background: yellow',
-        }).appendTo('#tab-tab-publico');
-    }
-
     $('#mus_EnCorrespondencia_CEP').on('hidden', function(e, params){
         var cep = $('#mus_EnCorrespondencia_CEP').editable('getValue', true);
         cep = cep.replace('-','');
@@ -196,9 +188,4 @@ $(function(){
 
     setDefaults();
     setWarningsCount();
-    getInactiveTabs();
-
-    $(document).ajaxComplete(function() {
-        countSobreTab();
-    });
 });
