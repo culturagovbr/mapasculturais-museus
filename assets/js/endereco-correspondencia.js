@@ -156,32 +156,39 @@ $(function(){
         }else{
             $('.js-endereco-correspondencia').hide();
 
-            $('#En_CEP').bind('DOMNodeInserted', function() { 
-                $('#mus_EnCorrespondencia_CEP').text($('#En_CEP').text());
+            $('#En_CEP').bind('DOMNodeInserted', function() {
+                var cep = $('#En_CEP').editable('getValue', true);
+                $('#mus_EnCorrespondencia_CEP').editable('setValue', cep);
             });
 
-            $('#En_Nome_Logradouro').bind('DOMNodeInserted', function() { 
-                $('#mus_EnCorrespondencia_Nome_Logradouro').text($('#En_Nome_Logradouro').text());
+            $('#En_Nome_Logradouro').bind('DOMNodeInserted', function() {
+                var logradouro = $('#En_Nome_Logradouro').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Nome_Logradouro').editable('setValue', logradouro);
             });
 
-            $('#En_Num').bind('DOMNodeInserted', function() { 
-                $('#mus_EnCorrespondencia_Num').text($('#En_Num').text());
+            $('#En_Num').bind('DOMNodeInserted', function() {
+                var numero = $('#En_Num').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Num').editable('setValue', numero);
             });
 
             $('#En_Complemento').bind('DOMNodeInserted', function() { 
-                $('#mus_EnCorrespondencia_Complemento').text($('#En_Complemento').text());
+                var complemento = $('#En_Nome_Logradouro').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Complemento').editable('setValue', complemento);
             });
 
-            $('#En_Bairro').bind('DOMNodeInserted', function() { 
-                $('#mus_EnCorrespondencia_Bairro').text($('#En_Bairro').text());
+            $('#En_Bairro').bind('DOMNodeInserted', function() {
+                var bairro = $('#En_Nome_Logradouro').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Bairro').editable('setValue', bairro);
             });
 
-            $('#En_Municipio').bind('DOMNodeInserted', function() { 
-                $('#mus_EnCorrespondencia_Municipio').text($('#En_Municipio').text());
+            $('#En_Municipio').bind('DOMNodeInserted', function() {
+                var municipio = $('#En_Nome_Logradouro').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Municipio').editable('setValue', municipio);
             });
 
-            $('#En_Estado').bind('DOMNodeInserted', function() { 
-                $('#mus_EnCorrespondencia_Estado').text($('#En_Estado').text());
+            $('#En_Estado').bind('DOMNodeInserted', function() {
+                var estado = $('#En_Nome_Logradouro').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Estado').editable('setValue', estado);
             });
         }
     });
