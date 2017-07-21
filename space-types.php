@@ -67,9 +67,7 @@ $core_space_types['metadata']['En_Municipio'] = array(
 );
 $core_space_types['metadata']['En_Estado'] = array(
     'label' => \MapasCulturais\i::__('Estado'),
-    'validations' => array(
-        'required' => \MapasCulturais\i::__('O Estado é obrigatório')
-    ),
+    'type' => 'select',
     'options' => array(
         'AC'=>'Acre',
         'AL'=>'Alagoas',
@@ -98,6 +96,9 @@ $core_space_types['metadata']['En_Estado'] = array(
         'SP'=>'São Paulo',
         'SE'=>'Sergipe',
         'TO'=>'Tocantins',
+    ),
+    'validations' => array(
+        'required' => \MapasCulturais\i::__('O estado é obrigatório')
     )
 );
 
