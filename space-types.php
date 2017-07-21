@@ -52,12 +52,7 @@ $core_space_types['metadata']['En_Num'] = array(
         'required' => \MapasCulturais\i::__('O Número é obrigatório')
     )
 );
-$core_space_types['metadata']['En_Complemento'] = array(
-    'label' => \MapasCulturais\i::__('Complemento'),
-    'validations' => array(
-        'required' => \MapasCulturais\i::__('O Complemento é obrigatório')
-    )
-);
+
 $core_space_types['metadata']['En_Bairro'] = array(
     'label' => \MapasCulturais\i::__('Bairro'),
     'validations' => array(
@@ -108,9 +103,6 @@ $core_space_types['metadata']['acessibilidade_fisica'] = array(
         \MapasCulturais\i::__('Vaga de estacionamento exclusiva para deficientes'),
         \MapasCulturais\i::__('Vaga de estacionamento exclusiva para idosos')
     ),
-    'validations' => array(
-        'required' => \MapasCulturais\i::__('Acessibilidade física é obrigatório')
-    )
 );
 
 $core_space_types['metadata']['acessibilidade'] = array(

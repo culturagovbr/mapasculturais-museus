@@ -8,7 +8,7 @@ $(function(){
 
         //Como o core não estabelece como requerido os campos do endereço, o CSS será adicionado via JS
         $('#En_CEP, #En_Nome_Logradouro, #En_Num, #En_Estado, ' +
-          '#En_Complemento, #En_Bairro, #En_Municipio').siblings('.label').addClass('required');
+          '#En_Bairro, #En_Municipio').siblings('.label').addClass('required');
     };
 
     /**
@@ -17,7 +17,7 @@ $(function(){
      */
     function setWarningsCount(){
         //Listener da requisição ajax para salvar o museu
-        $(document).ajaxComplete(function(){
+        $(document).ajaxComplete(function(event, xhr){
             var tabsToWarn = getInactiveTabs();
             tabsToWarn = countWarningsPerTab(tabsToWarn);
             
@@ -25,7 +25,7 @@ $(function(){
                 var warnings = tabsToWarn[key].numberOfWarnings;
 
                 if(warnings > 0){
-                    var errorHtml = `<span id="tab-warning" title="Há ${warnings} erros nesta aba. Verifique e tente novamente." class="danger hltip js-response-error" data-hltip-classes="hltip-danger"></span>`;
+                    var errorHtml = `<span id="tab-warning" title="Há ${warnings} item(s) obrigatório(s) nesta aba. Verifique e tente novamente." class="danger hltip js-response-error" data-hltip-classes="hltip-danger"></span>`;
                     $('#'+tabsToWarn[key].idTab).append(errorHtml);
                 }
             }

@@ -454,9 +454,6 @@ class Theme extends BaseMinc\Theme {
                     'Material de divulgação impresso',
                     'Audioguia',
                     'Guia, monitor e/ou mediador'
-                ],
-                'validations' => [
-                    'required' => \MapasCulturais\i::__('É obrigatório informar acessibilidade a estrangeiros')
                 ]
             ],
             'acessibilidade_visual' => [
@@ -471,9 +468,6 @@ class Theme extends BaseMinc\Theme {
                     'Tradutor de Linguagem Brasileira de Sinais (LIBRAS)',
                     'Texto/Etiquetas em braile com informações sobre os objetos expostos'
                 ],
-                'validations' => [
-                    'required' => \MapasCulturais\i::__('É obrigatório informar acessibilidade auditiva e visual')
-                ]
             ],
             'arquivo_possui' => [
                 'label' => 'O museu possui arquivo histórico?',
@@ -631,9 +625,6 @@ class Theme extends BaseMinc\Theme {
             ],
             'EnCorrespondencia_Complemento' => [
                 'label' => 'Complemento',
-                'validations' => array(
-                    'required' => \MapasCulturais\i::__('O Complemento do endereço de correspondência é obrigatório')
-                )
             ],
             'EnCorrespondencia_CaixaPostal' => [
                 'label' => 'Caixa Postal',
@@ -1022,7 +1013,7 @@ class Theme extends BaseMinc\Theme {
                 ],
                 [
                     'isInline' => false,
-                    'label' => 'Tipo de fera',
+                    'label' => 'Tipo de esfera',
                     'placeholder' => 'Selecione o tipo da esfera',
                     'filter' => [
                         'param' => 'esfera_tipo',
