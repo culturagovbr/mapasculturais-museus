@@ -25,7 +25,7 @@ $(function(){
                 var warnings = tabsToWarn[key].numberOfWarnings;
 
                 if(warnings > 0){
-                    var errorHtml = `<span id="tab-warning" title="Há ${warnings} item(s) obrigatório(s) nesta aba. Verifique e tente novamente." class="danger hltip js-response-error" data-hltip-classes="hltip-danger"></span>`;
+                    var errorHtml = '<span id="tab-warning" title="Há ' + warnings + ' item(s) obrigatório(s) nesta aba. Verifique e tente novamente." class="danger hltip js-response-error" data-hltip-classes="hltip-danger"></span>';
                     $('#'+tabsToWarn[key].idTab).append(errorHtml);
                 }
             }
