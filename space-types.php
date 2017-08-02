@@ -131,8 +131,12 @@ $core_space_types['metadata']['acessibilidade_fisica'] = array(
         \MapasCulturais\i::__('Sanitário adaptado'),
         \MapasCulturais\i::__('Telefone público adaptado'),
         \MapasCulturais\i::__('Vaga de estacionamento exclusiva para deficientes'),
-        \MapasCulturais\i::__('Vaga de estacionamento exclusiva para idosos')
+        \MapasCulturais\i::__('Vaga de estacionamento exclusiva para idosos'),
+        \MapasCulturais\i::__('Não possui')
     ),
+    'validations' => [
+        'required' => \MapasCulturais\i::__('É obrigatório informar se possui acessibilidade física')
+    ]
 );
 
 $core_space_types['metadata']['acessibilidade'] = array(

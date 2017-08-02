@@ -172,27 +172,46 @@ $(function(){
             });
 
             $('#En_Complemento').bind('DOMNodeInserted', function() { 
-                var complemento = $('#En_Nome_Logradouro').editable('getValue', true);
+                var complemento = $('#En_Complemento').editable('getValue', true);
                 $('#mus_EnCorrespondencia_Complemento').editable('setValue', complemento);
             });
 
             $('#En_Bairro').bind('DOMNodeInserted', function() {
-                var bairro = $('#En_Nome_Logradouro').editable('getValue', true);
+                var bairro = $('#En_Bairro').editable('getValue', true);
                 $('#mus_EnCorrespondencia_Bairro').editable('setValue', bairro);
             });
 
             $('#En_Municipio').bind('DOMNodeInserted', function() {
-                var municipio = $('#En_Nome_Logradouro').editable('getValue', true);
+                var municipio = $('#En_Municipio').editable('getValue', true);
                 $('#mus_EnCorrespondencia_Municipio').editable('setValue', municipio);
             });
 
             $('#En_Estado').bind('DOMNodeInserted', function() {
-                var estado = $('#En_Nome_Logradouro').editable('getValue', true);
+                var estado = $('#En_Estado').editable('getValue', true);
                 $('#mus_EnCorrespondencia_Estado').editable('setValue', estado);
             });
         }
     });
 
+    //bind responsável por preencher o metadata "Acessibilidade" que é obrigatório no core. Qualquer escolhe em acess. física fára
+    //com que 'Acessibilidade' seja sim, menos em caso de 'outros' ou 'não' 
+    function setAcessibilidade(){
+        $('#acessibilidade_fisica').bind('DOMNodeInserted', function(){
+            var selected_value = $('#acessibilidade_fisica').editable('getValue', true);
+            var acessibilidade_value;
+
+            if(selected_value === 'Não possui'){
+                acessibilidade_value = 'Não';
+            }
+            else{
+                acessibilidade_value = 'Sim';
+            }
+
+            $('#acessibilidade').editable('setValue', acessibilidade_value);
+        });
+    }
+
+    setTimeout(setAcessibilidade, 1000);
     setDefaults();
     setWarningsCount();
 });

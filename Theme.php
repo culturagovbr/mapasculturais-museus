@@ -453,7 +453,11 @@ class Theme extends BaseMinc\Theme {
                     'Sinalização visual',
                     'Material de divulgação impresso',
                     'Audioguia',
-                    'Guia, monitor e/ou mediador'
+                    'Guia, monitor e/ou mediador',
+                    'Não possui'
+                ],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar se possui acessibilidade aos turistas')
                 ]
             ],
             'acessibilidade_visual' => [
@@ -466,8 +470,12 @@ class Theme extends BaseMinc\Theme {
                     'Maquetes táteis ou mapas em relevo',
                     'Obras e reproduções táteis',
                     'Tradutor de Linguagem Brasileira de Sinais (LIBRAS)',
-                    'Texto/Etiquetas em braile com informações sobre os objetos expostos'
+                    'Texto/Etiquetas em braile com informações sobre os objetos expostos',
+                    'Não possui'
                 ],
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar se possui acessibilidade audiovisual')
+                ]
             ],
             'arquivo_possui' => [
                 'label' => 'O museu possui arquivo histórico?',

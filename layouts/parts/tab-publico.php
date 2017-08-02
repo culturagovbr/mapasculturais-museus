@@ -63,13 +63,14 @@ $show_instalacoes = $this->isEditable() ||
             <h5>Acessibilidade</h5>
         <?php endif ?>
 
+        <!-- Acessibilidade faz parte do core. Está sendo setado de acordo com o escolhido em acessibilidade física via JS -->
         <?php if($this->isEditable() || $entity->acessibilidade): ?>
-            <p><span class="label required">Acessibilidade: </span><span class="js-editable" data-edit="acessibilidade" data-original-title="Acessibilidade"><?php echo $entity->acessibilidade; ?></span></p>
+            <p class="hidden"><span class="label required">Acessibilidade: </span><span id="acessibilidade" class="js-editable" data-edit="acessibilidade" data-original-title="Acessibilidade"><?php echo $entity->acessibilidade; ?></span></p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->acessibilidade_fisica): ?>
             <p>
-                <span class="label">Acessibilidade física: </span>
+                <span class="label required">Acessibilidade física: </span>
                 <editable-multiselect entity-property="acessibilidade_fisica" empty-label="Selecione" allow-other="true" box-title="Acessibilidade física:"></editable-multiselect>
             </p>
         <?php endif; ?>
@@ -77,14 +78,14 @@ $show_instalacoes = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_acessibilidade_visual): ?>
         <p>
-            <span class="label">Acessibilidade para pessoas com deficiências auditivas e visuais: </span>
+            <span class="label required">Acessibilidade para pessoas com deficiências auditivas e visuais: </span>
             <editable-multiselect entity-property="mus_acessibilidade_visual" empty-label="Selecione" allow-other="true" box-title="Acessibilidade para pessoas com deficiências auditivas e visuais" help-text="O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e visuais?"></editable-multiselect>
         </p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->mus_servicos_atendimentoEstrangeiros): ?>
         <p>
-            <span class="label">Atendimento aos turistas estrangeiros:</span>
+            <span class="label required">Atendimento aos turistas estrangeiros:</span>
             <editable-multiselect entity-property="mus_servicos_atendimentoEstrangeiros" empty-label="Selecione" box-title="Atendimento ao turista estrangeiro" help-text="O museu possui recursos para atendimento de turistas estrangeiros, como sinalização, audioguia, folder etc. em outros idiomas?"></editable-multiselect>
         </p>
         <?php endif; ?>
