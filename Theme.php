@@ -80,6 +80,15 @@ class Theme extends BaseMinc\Theme {
             //     $api_params['owner'] = 'EQ('.$app->config['museus.ownerAgentId'].')';
         });
 
+//         desconsidera o site de origem da entidade
+        $app->hook('entity(space).isUserAdmin(<<*>>)', function($user, $role, &$result){
+            if($user->is($role)){
+                if($this->type->id >= 60 && $this->type->id <= 69){
+                    $result = true;
+                }
+            }
+        });
+
         parent::_init();
 
 
