@@ -4,7 +4,7 @@ $this->layout = 'panel'
 <div class="panel-list panel-main-content">
 	<header class="panel-header clearfix">
 		<h2>Meus selos</h2>
-        <?php if($app->isEnabled('seals') && ($app->user->is('superAdmin')  || $app->user->is('admin') || $app->user->profile->id == $app->config['museus.ownerAgentId'] )): ?>
+        <?php if($app->isEnabled('seals') && ($app->user->is('admin') || $app->user->profile->id == $app->config['museus.ownerAgentId'] )): ?>
 		  <a class="btn btn-default add" href="<?php echo $app->createUrl('seal', 'create'); ?>">Adicionar novo selo</a>
         <?php endif; ?>
 	</header>
