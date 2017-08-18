@@ -25,7 +25,7 @@
             <?php $this->applyTemplateHook('nav.panel.spaces','after'); ?>
         <?php endif; ?>
 
-        <?php if($app->isEnabled('seals') && ($app->user->hasControlSeals || $app->user->is('superAdmin')  || $app->user->is('admin') || $app->user->profile->id == $app->config['museus.ownerAgentId'] )): ?>
+        <?php if($app->isEnabled('seals') && ($app->user->hasControlSeals || $app->user->is('admin') || $app->user->profile->id == $app->config['museus.ownerAgentId'] )): ?>
             <?php $this->applyTemplateHook('nav.panel.seals','before'); ?>
             <li><a <?php if($this->template == 'panel/seals') echo 'class="active"'; ?> href="<?php echo $app->createUrl('panel', 'seals') ?>"><span class="icon icon-seal"></span> <?php $this->dict('entities: My Seals') ?></a></li>
             <?php $this->applyTemplateHook('nav.panel.seals','after'); ?>
@@ -48,7 +48,7 @@
         <?php endif; ?>
 
 
-        <?php if(($app->user->is('superAdmin')  || $app->user->is('admin') )): ?>
+        <?php if($app->user->is('admin')): ?>
             <?php $this->applyTemplateHook('nav.panel.listUsers','before'); ?>
             <li><a <?php if($this->template == 'panel/list-users') echo 'class="active"'; ?> href="<?php echo $app->createUrl('panel', 'listUsers') ?>"><span class="icon icon-group"></span> Usuários e papéis</a></li>
             <?php $this->applyTemplateHook('nav.panel.listUsers','after'); ?>

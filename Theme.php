@@ -80,6 +80,15 @@ class Theme extends BaseMinc\Theme {
             //     $api_params['owner'] = 'EQ('.$app->config['museus.ownerAgentId'].')';
         });
 
+//         desconsidera o site de origem da entidade
+        $app->hook('entity(space).isUserAdmin(<<*>>)', function($user, $role, &$result){
+            if($user->is($role)){
+                if($this->type->id >= 60 && $this->type->id <= 69){
+                    $result = true;
+                }
+            }
+        });
+
         parent::_init();
 
 
@@ -250,11 +259,6 @@ class Theme extends BaseMinc\Theme {
 
     protected function _getSpaceMetadata() {
         return [
-            'verificado' => [
-                'label' => 'O Museu é verificado?',
-                'type' => 'boolean'
-            ],
-
             'owned' => [
                 'label' => 'Se o museu já apropriado por algum usuário'
             ],
@@ -907,20 +911,14 @@ class Theme extends BaseMinc\Theme {
         $controller = $app->getControllerByEntity($entity_class);
 
         if ($entity_class === 'MapasCulturais\Entities\Event') {
-            $entities = $controller->apiQueryByLocation(array(
+            $entities = $controller->apiQueryByLocation([
                 '@from' => date('Y-m-d'),
                 '@to' => date('Y-m-d', time() + 28 * 24 * 3600),
-                '@verified' => 'IN(1)',
+                '@verified' => '1',
                 '@select' => 'id'
-            ));
-
-        }elseif ($entity_class === 'MapasCulturais\Entities\Space') {
-            $entities = $controller->apiQuery([
-                '@select' => 'id',
-                'mus_verificado' => 'EQ(1)'
             ]);
-        }else{
 
+        } else {
             $entities = $controller->apiQuery([
                 '@select' => 'id',
                 '@verified' => 'IN(1)',
@@ -984,7 +982,7 @@ class Theme extends BaseMinc\Theme {
                     'isArray' => false,
                     'filter' => [
                         'param' => '@verified',
-                        'value' => 'IN(1)'
+                        'value' => '1'
                     ]
                 ],
                 [
