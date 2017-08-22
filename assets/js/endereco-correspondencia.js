@@ -226,7 +226,7 @@ $(function(){
     }
 
     //bind responsável por preencher o metadata "Acessibilidade" que é obrigatório no core. Qualquer escolhe em acess. física fára
-    //com que 'Acessibilidade' seja sim, menos em caso de 'outros' ou 'não' 
+    //com que 'Acessibilidade' seja sim, menos em caso de 'não' 
     function setAcessibilidade(){
         $('#acessibilidade_fisica').bind('DOMNodeInserted', function(){
             var selected_value = $('#acessibilidade_fisica').editable('getValue', true);
@@ -243,7 +243,7 @@ $(function(){
         });
     }
 
-    setTimeout(setAcessibilidade, 1000);
+    setTimeout(setAcessibilidade, 3000);
     setDefaults();
     setWarningsCount();
     checkMailAddress();
