@@ -179,7 +179,6 @@
                    <?php if($app->isEnabled('seals') &&
                             (
                                     $app->user->hasControlSeals
-                                    || $app->user->is('superAdmin')
                                     || $app->user->is('admin')
                                     || $app->user->profile->id == $app->config['museus.ownerAgentId']
                             )
