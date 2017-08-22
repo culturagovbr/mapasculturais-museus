@@ -147,9 +147,6 @@ $core_space_types['metadata']['acessibilidade'] = array(
         'Sim' => \MapasCulturais\i::__('Sim'),
         'Não' => \MapasCulturais\i::__('Não')
     ),
-    'validations' => array(
-        'required' => \MapasCulturais\i::__('Acessibilidade é obrigatório')
-    )
 );
 
 

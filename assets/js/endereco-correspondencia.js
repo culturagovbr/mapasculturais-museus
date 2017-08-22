@@ -193,6 +193,38 @@ $(function(){
         }
     });
 
+    /**
+     * Quando carregado a página, essa função certifica-se de que o endereço de correspondência
+     * seja preenchido com os mesmos valores do endereço do museu caso a opção de 'mesmo endereço de correspondencia'
+     * esteja marcado como 'sim'
+     */
+    function checkMailAddress(){
+        var showEnderecoCorrespondencia = $('#mus_EnCorrespondencia_mesmo').editable('getValue', true);
+
+        if(showEnderecoCorrespondencia == 'sim'){
+            var cep = $('#En_CEP').editable('getValue', true);
+            $('#mus_EnCorrespondencia_CEP').editable('setValue', cep);
+
+            var logradouro = $('#En_Nome_Logradouro').editable('getValue', true);
+            $('#mus_EnCorrespondencia_Nome_Logradouro').editable('setValue', logradouro);
+
+            var numero = $('#En_Num').editable('getValue', true);
+            $('#mus_EnCorrespondencia_Num').editable('setValue', numero);
+
+            var complemento = $('#En_Complemento').editable('getValue', true);
+            $('#mus_EnCorrespondencia_Complemento').editable('setValue', complemento);
+
+            var bairro = $('#En_Bairro').editable('getValue', true);
+            $('#mus_EnCorrespondencia_Bairro').editable('setValue', bairro);
+
+            var municipio = $('#En_Municipio').editable('getValue', true);
+            $('#mus_EnCorrespondencia_Municipio').editable('setValue', municipio);
+
+            var estado = $('#En_Estado').editable('getValue', true);
+            $('#mus_EnCorrespondencia_Estado').editable('setValue', estado);
+        }
+    }
+
     //bind responsável por preencher o metadata "Acessibilidade" que é obrigatório no core. Qualquer escolhe em acess. física fára
     //com que 'Acessibilidade' seja sim, menos em caso de 'outros' ou 'não' 
     function setAcessibilidade(){
@@ -214,4 +246,5 @@ $(function(){
     setTimeout(setAcessibilidade, 1000);
     setDefaults();
     setWarningsCount();
+    checkMailAddress();
 });
