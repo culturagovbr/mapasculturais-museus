@@ -837,6 +837,18 @@ class Theme extends BaseMinc\Theme {
             'instr_documento_n' => [
                 'label' => 'Caso o Museu não realize nenhuma ação de documentação de seu acervo, justifique',
                 'type' => 'text'
+            ],
+            'total_bens_culturais' => [
+                'label' => 'Informe o número total de bens culturais de caráter museológico que compõem o acervo:',
+                'type' => 'number'
+            ],
+            'exatidao_total_bens_culturais' => [
+                'label' => 'Informe o número total de bens culturais de caráter museológico que compõem o acervo:',
+                'type' => 'select',
+                'options' => [
+                    'Exato',
+                    'Aproximado'
+                ]
             ]
         ];
     }
