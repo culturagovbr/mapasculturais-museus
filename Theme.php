@@ -5,6 +5,7 @@ namespace MapasMuseus;
 use BaseMinc;
 use MapasCulturais\App;
 use MapasCulturais\Definitions;
+use MapasCulturais\i;
 
 class Theme extends BaseMinc\Theme {
 
@@ -235,6 +236,39 @@ class Theme extends BaseMinc\Theme {
         // $app->hook('view.render(<<*>>):before', function() use ($app) {
         //     $app->view->enqueueScript('app', 'agenda-single', 'js/analytics.js', array('mapasculturais'));
         // });
+
+        //Filtragem de museus por selos
+        $app->hook('search.filters', function(&$filters) use($app) {
+            $seals = \MapasCulturais\App::i()->repo('Seal')->findBy(array('name' => array(
+                        'Formulário de Visitação Anual - 2014', 
+                        'Formulário de Visitação Anual - 2015',
+                        'Registro de Museus',
+                        'SBM - Sistema Brasileiro de Museus',
+                        'RENIM - Rede Nacional de Identificação de Museus'
+                    )
+                )
+            );
+
+            $seal_filter = [
+                'label' => i::__('Selos'),
+                'placeholder' => i::__('Selecione os Selos'),
+                'fieldType' => 'checklist',
+                'type' => 'custom',
+                'isArray' => true,
+                'isInline' => false,
+                'filter' => [
+                    'param' => '@seals',
+                    'value' => '{val}'
+                ],
+                'options' => []
+            ];
+
+            foreach($seals as $seal) {
+                $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
+            }
+
+            $filters['space']['seal'] = $seal_filter;
+        });
     }
 
     static function getThemeFolder() {
