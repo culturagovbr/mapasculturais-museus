@@ -84,8 +84,11 @@ class Theme extends BaseMinc\Theme {
 //         desconsidera o site de origem da entidade
         $app->hook('entity(space).isUserAdmin(<<*>>)', function($user, $role, &$result){
             if($user->is($role)){
-                if($this->isNew() || ($this->type->id >= 60 && $this->type->id <= 69)){
+                if($this->isNew() || ($this->getType() !== null && $this->getType()->id >= 60 && $this->getType()->id <= 69)){
                     $result = true;
+                }
+                else {
+                    $result = false;
                 }
             }
         });
