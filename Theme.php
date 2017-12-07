@@ -246,8 +246,6 @@ class Theme extends BaseMinc\Theme {
                         'Formulário de Visitação Anual - 2014', 
                         'Formulário de Visitação Anual - 2015',
                         'Registro de Museus',
-                        'SBM - Sistema Brasileiro de Museus',
-                        'RENIM - Rede Nacional de Identificação de Museus'
                     )
                 )
             );
