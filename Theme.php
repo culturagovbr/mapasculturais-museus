@@ -217,6 +217,20 @@ class Theme extends BaseMinc\Theme {
         //     $this->enqueueScript('app', 'botao-meu-museu', 'js/botao-meu-museu.js');
         //     $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
         // });
+        
+        $app->hook('mapasculturais.scripts', function() use($app, $plugin){
+            echo "<script type='text/javascript'>
+                    if(MapasCulturais.mode !== 'development'){
+                        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                        ga('create', 'UA-87133854-1', 'auto');
+                        ga('send', 'pageview');
+                    }
+                </script>";
+        });
 
         $app->hook('view.render(space/<<*>>):before', function(){
             $this->addTaxonoyTermsToJs('mus_area');
