@@ -259,6 +259,7 @@ class Theme extends BaseMinc\Theme {
             $seals = \MapasCulturais\App::i()->repo('Seal')->findBy(array('name' => array(
                         'Formulário de Visitação Anual - 2014', 
                         'Formulário de Visitação Anual - 2015',
+                        'Formulário de Visitação Anual - 2016',
                         'Registro de Museus',
                     )
                 )
