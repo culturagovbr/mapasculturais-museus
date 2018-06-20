@@ -186,6 +186,18 @@ class Theme extends BaseMinc\Theme {
         <?php
         });
 
+        $app->hook('mapasculturais.add_entity_modal', function ($meta, &$show_meta, &$class) {
+            $_base = "mus_EnCorrespondencia_";
+            $_key = $meta->key;
+            if (isset($_key)) {
+                if ($_base . "mesmo" === $_key) {
+                    $show_meta = true;
+                } else if (substr($_key, 0, strlen($_base)) === $_base) {
+                    $class .= " en-correspondencia";
+                }
+            }
+        });
+
         $app->hook('template(space.<<*>>.location):after', function(){
             $this->enqueueScript('app', 'endereco-correspondencia', 'js/endereco-correspondencia.js');
             $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
