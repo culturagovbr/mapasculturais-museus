@@ -228,8 +228,10 @@ $(function(){
     //bind responsável por preencher o metadata "Acessibilidade" que é obrigatório no core. Qualquer escolhe em acess. física fára
     //com que 'Acessibilidade' seja sim, menos em caso de 'não' 
     function setAcessibilidade(){
+        //Há casos em que um museu já pode ter preenchido "acessibilidade física" antes de ser obrigatório e 
         $('#acessibilidade_fisica').bind('DOMNodeInserted', function(){
             var selected_value = $('#acessibilidade_fisica').editable('getValue', true);
+            
             var acessibilidade_value;
 
             if(selected_value === 'Não possui'){
@@ -242,7 +244,7 @@ $(function(){
             $('#acessibilidade').editable('setValue', acessibilidade_value);
         });
     }
-
+    
     setTimeout(setAcessibilidade, 3000);
     setDefaults();
     setWarningsCount();

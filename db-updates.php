@@ -146,7 +146,7 @@ return [
                 continue;
 
             $d = explode("\t", $line);
-
+            
             if (count($d) < 119)
                 continue;
 
@@ -1134,5 +1134,61 @@ return [
                     AND n.user_id = (SELECT id FROM usr WHERE profile_id = $agent_id)
             )
         ");
+    },
+    'normalize space meta acessibilidade' => function () use($conn, $app) {
+        $spaceCounter = 0;
+
+        function insertAcessibilidadeMeta($conn, $value, $id) {
+            $conn->executeQuery("INSERT into space_meta(id, key, value, object_id) VALUES (nextval('space_meta_id_seq'::regclass), 'acessibilidade', '{$value}', {$id})");  
+        }
+
+        function updateAcessibilidadeMeta($conn, $value, $id) {
+            $conn->executeQuery("UPDATE space_meta SET value = '{$value}' where object_id = {$id} AND key = 'acessibilidade'");
+        }
+
+        $space = $app->repo('Space')->findBy(array('_type'=>array(60, 61)));
+        
+        foreach($space as $s) {
+            if(!key_exists('acessibilidade', $s->metadata)) {
+                if(!key_exists('acessibilidade_fisica', $s->metadata)) {
+                    insertAcessibilidadeMeta($conn, 'não', $s->id);
+                    $spaceCounter++;
+                }
+                else {
+                    /*Se existe a 'acessibilidade física' e não existe 'acessibilidade, insere 'Não' em acessibilidade caso o valor seja 'Não possui'.
+                    Para todos os outros casos é marcado o valor 'Sim' */
+                    if($s->metadata['acessibilidade_fisica'] === 'Não possui' || $s->metadata['acessibilidade_fisica'] === '') {
+                        insertAcessibilidadeMeta($conn, 'não', $s->id);
+                        $spaceCounter++;
+                    }
+                    else {
+                        insertAcessibilidadeMeta($conn, 'sim', $s->id);
+                        $spaceCounter++;
+                    }
+                }
+            }
+            else {
+                /* Se não houver 'acessibilidade física' mas 'acessibilidade' está vazio, update 'acessibilidade' como 'Não' */
+                if(!key_exists('acessibilidade_fisica', $s->metadata)) {
+                    if($s->metadata['acessibilidade'] === '') {
+                        updateAcessibilidadeMeta($conn, 'não', $s->id);
+                        $spaceCounter++;
+                    }
+                }else {
+                    /*Se existe a acessibilidade física, grava 'Não' em acessibilidade caso o valor seja 'Não possui'.
+                    Para todos os outros casos é marcado o valor 'Sim' */
+                    if($s->metadata['acessibilidade'] === '' && $s->metadata['acessibilidade_fisica'] === 'Não possui') {
+                        updateAcessibilidadeMeta($conn, 'não', $s->id);
+                        $spaceCounter++;
+                    }
+                    else if($s->metadata['acessibilidade'] === '' && $s->metadata['acessibilidade_fisica'] !== 'Não possui'){
+                        updateAcessibilidadeMeta($conn, 'sim', $s->id);
+                        $spaceCounter++;
+                    }
+                }
+            }
+        }
+        
+        echo "{$spaceCounter} espaços normalizados com sucesso!";
     }
 ];

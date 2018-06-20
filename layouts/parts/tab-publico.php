@@ -65,7 +65,12 @@ $show_instalacoes = $this->isEditable() ||
 
         <!-- Acessibilidade faz parte do core. Está sendo setado de acordo com o escolhido em acessibilidade física via JS -->
         <?php if($this->isEditable() || $entity->acessibilidade): ?>
-            <p class="hidden"><span class="label required">Acessibilidade: </span><span id="acessibilidade" class="js-editable" data-edit="acessibilidade" data-original-title="Acessibilidade"><?php echo $entity->acessibilidade; ?></span></p>
+            <p class="hidden">
+                <span class="label required">Acessibilidade: </span>
+                <span id="acessibilidade" class="js-editable" data-edit="acessibilidade" data-original-title="Acessibilidade">
+                    <?php echo $entity->acessibilidade; ?>
+                </span>
+            </p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->acessibilidade_fisica): ?>

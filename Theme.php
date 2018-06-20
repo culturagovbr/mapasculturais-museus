@@ -5,6 +5,7 @@ namespace MapasMuseus;
 use BaseMinc;
 use MapasCulturais\App;
 use MapasCulturais\Definitions;
+use MapasCulturais\i;
 
 class Theme extends BaseMinc\Theme {
 
@@ -83,8 +84,11 @@ class Theme extends BaseMinc\Theme {
 //         desconsidera o site de origem da entidade
         $app->hook('entity(space).isUserAdmin(<<*>>)', function($user, $role, &$result){
             if($user->is($role)){
-                if($this->isNew() || ($this->type->id >= 60 && $this->type->id <= 69)){
+                if($this->isNew() || ($this->getType() !== null && $this->getType()->id >= 60 && $this->getType()->id <= 69)){
                     $result = true;
+                }
+                else {
+                    $result = false;
                 }
             }
         });
@@ -213,6 +217,20 @@ class Theme extends BaseMinc\Theme {
         //     $this->enqueueScript('app', 'botao-meu-museu', 'js/botao-meu-museu.js');
         //     $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
         // });
+        
+        $app->hook('mapasculturais.scripts', function() use($app, $plugin){
+            echo "<script type='text/javascript'>
+                    if(MapasCulturais.mode !== 'development'){
+                        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                        ga('create', 'UA-87133854-1', 'auto');
+                        ga('send', 'pageview');
+                    }
+                </script>";
+        });
 
         $app->hook('view.render(space/<<*>>):before', function(){
             $this->addTaxonoyTermsToJs('mus_area');
@@ -235,6 +253,38 @@ class Theme extends BaseMinc\Theme {
         // $app->hook('view.render(<<*>>):before', function() use ($app) {
         //     $app->view->enqueueScript('app', 'agenda-single', 'js/analytics.js', array('mapasculturais'));
         // });
+
+        //Filtragem de museus por selos
+        $app->hook('search.filters', function(&$filters) use($app) {
+            $seals = \MapasCulturais\App::i()->repo('Seal')->findBy(array('name' => array(
+                        'Formulário de Visitação Anual - 2014', 
+                        'Formulário de Visitação Anual - 2015',
+                        'Formulário de Visitação Anual - 2016',
+                        'Registro de Museus',
+                    )
+                )
+            );
+
+            $seal_filter = [
+                'label' => i::__('Selos'),
+                'placeholder' => i::__('Selecione os Selos'),
+                'fieldType' => 'checklist',
+                'type' => 'custom',
+                'isArray' => true,
+                'isInline' => false,
+                'filter' => [
+                    'param' => '@seals',
+                    'value' => '{val}'
+                ],
+                'options' => []
+            ];
+
+            foreach($seals as $seal) {
+                $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
+            }
+
+            $filters['space']['seal'] = $seal_filter;
+        });
     }
 
     static function getThemeFolder() {
@@ -837,6 +887,18 @@ class Theme extends BaseMinc\Theme {
             'instr_documento_n' => [
                 'label' => 'Caso o Museu não realize nenhuma ação de documentação de seu acervo, justifique',
                 'type' => 'text'
+            ],
+            'total_bens_culturais' => [
+                'label' => 'Informe o número total de bens culturais de caráter museológico que compõem o acervo:',
+                'type' => 'number'
+            ],
+            'exatidao_total_bens_culturais' => [
+                'label' => 'Informe o número total de bens culturais de caráter museológico que compõem o acervo:',
+                'type' => 'select',
+                'options' => [
+                    'Exato',
+                    'Aproximado'
+                ]
             ]
         ];
     }

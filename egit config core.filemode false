@@ -1,0 +1,233 @@
+[1mdiff --git a/README.md b/README.md[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/Theme.php b/Theme.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/apply-seals/seal_fva2014.csv b/apply-seals/seal_fva2014.csv[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/apply-seals/seal_fva2015.csv b/apply-seals/seal_fva2015.csv[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/css/sass/_overrides.scss b/assets/css/sass/_overrides.scss[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/css/sass/_variables.scss b/assets/css/sass/_variables.scss[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/css/sass/main.scss b/assets/css/sass/main.scss[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/img/favicon.ico b/assets/img/favicon.ico[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/img/logo-ibram.png b/assets/img/logo-ibram.png[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/img/logo-site.png b/assets/img/logo-site.png[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/img/share.png b/assets/img/share.png[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/img/unverified-seal.png b/assets/img/unverified-seal.png[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/img/verified-seal.png b/assets/img/verified-seal.png[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/js/botao-meu-museu.js b/assets/js/botao-meu-museu.js[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/js/endereco-correspondencia.js b/assets/js/endereco-correspondencia.js[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/assets/js/tim.js b/assets/js/tim.js[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mindex 957981b..6a4963f[m
+[1m--- a/assets/js/tim.js[m
+[1m+++ b/assets/js/tim.js[m
+[36m@@ -185,8 +185,8 @@[m
+             // Bind the click event handler[m
+             $(this).on('click', 'a', function(e) {[m
+                 // Make the old tab inactive.[m
+[31m-                $active.parent().removeClass('active');[m
+[31m-                $content.hide();[m
+[32m+[m[32m                $('.abas li').removeClass('active');[m
+[32m+[m[32m                $('.tabs-content .aba-content').hide();[m
+ [m
+                 // Update the variables with the new link and content[m
+                 $active = $(this);[m
+[36m@@ -207,10 +207,18 @@[m
+                     $(this).click();[m
+                 }[m
+             });[m
+[32m+[m[41m            [m
+[32m+[m[32m            var tabActive = location.hash.match(new RegExp('tab=([^&]*)'));[m
+[32m+[m[32m            tabActive = (tabActive == null) ? 'sobre' : tabActive[1];[m
+[32m+[m[32m            tabActive = ($(`.aba-content#${tabActive}`).length) ? tabActive : 'sobre';[m
+[32m+[m[41m            [m
+[32m+[m[32m            $('.tabs-content .aba-content').hide();[m
+[32m+[m[32m            $(`.tabs-content #${tabActive}`).show();[m
+[32m+[m[41m            [m
+[32m+[m[32m            $('.abas li').removeClass('active');[m
+[32m+[m[32m            $(`.abas li a#tab-${tabActive}`).parent().addClass('active');[m
+         });[m
+ [m
+[31m-[m
+[31m-[m
+         $('.tag-box div').slimScroll({[m
+             position: 'right',[m
+             distance: '0px',[m
+[1mdiff --git a/conf-base.php b/conf-base.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/db-updates.php b/db-updates.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/about-service-begin.php b/layouts/parts/about-service-begin.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/botao-meu-museu.php b/layouts/parts/botao-meu-museu.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/endereco-correspondencia.php b/layouts/parts/endereco-correspondencia.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/header-about-nav.php b/layouts/parts/header-about-nav.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/header-logo.php b/layouts/parts/header-logo.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/header-main-nav.php b/layouts/parts/header-main-nav.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/header.php b/layouts/parts/header.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/home-spaces.php b/layouts/parts/home-spaces.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/mais-campos.php b/layouts/parts/mais-campos.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/panel-nav.php b/layouts/parts/panel-nav.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/panel/highlighted-message--numsniic.php b/layouts/parts/panel/highlighted-message--numsniic.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/search/filter-spaces.php b/layouts/parts/search/filter-spaces.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/singles/space-extra-info.php b/layouts/parts/singles/space-extra-info.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/singles/space-servico.php b/layouts/parts/singles/space-servico.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/tab-mais.php b/layouts/parts/tab-mais.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/tab-publico.php b/layouts/parts/tab-publico.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/tabs-museu.php b/layouts/parts/tabs-museu.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/layouts/parts/widget-areas-space.php b/layouts/parts/widget-areas-space.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/museus-ibram.csv b/museus-ibram.csv[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/museus.csv b/museus.csv[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/pages/_left.md b/pages/_left.md[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/Plugin.php b/plugins/SealModelMuseus/Plugin.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/assets/css/.sass-cache/6b3fe60774b97a760d12f26f13a7cbeb8182bee9/main.sassc b/plugins/SealModelMuseus/assets/css/.sass-cache/6b3fe60774b97a760d12f26f13a7cbeb8182bee9/main.sassc[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/assets/css/.sass-cache/c152594775f44791d8f19bcb03b782041bf999c3/main.sassc b/plugins/SealModelMuseus/assets/css/.sass-cache/c152594775f44791d8f19bcb03b782041bf999c3/main.sassc[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/assets/css/.sass-cache/f855b19756b121eb80e244cf0ef2945ba4a14ca6/main.sassc b/plugins/SealModelMuseus/assets/css/.sass-cache/f855b19756b121eb80e244cf0ef2945ba4a14ca6/main.sassc[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/assets/css/model-tab-museus.css b/plugins/SealModelMuseus/assets/css/model-tab-museus.css[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/assets/css/model-tab-museus.css.map b/plugins/SealModelMuseus/assets/css/model-tab-museus.css.map[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/assets/css/sass/main.sass b/plugins/SealModelMuseus/assets/css/sass/main.sass[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/assets/img/modelo_certificado_museus.jpg b/plugins/SealModelMuseus/assets/img/modelo_certificado_museus.jpg[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/assets/img/preview-model-museus.png b/plugins/SealModelMuseus/assets/img/preview-model-museus.png[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/printsealrelation.php b/plugins/SealModelMuseus/printsealrelation.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseus/views/printsealrelation.php b/plugins/SealModelMuseus/views/printsealrelation.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/Plugin.php b/plugins/SealModelMuseusSBM/Plugin.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/assets/css/.sass-cache/6b3fe60774b97a760d12f26f13a7cbeb8182bee9/main.sassc b/plugins/SealModelMuseusSBM/assets/css/.sass-cache/6b3fe60774b97a760d12f26f13a7cbeb8182bee9/main.sassc[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/assets/css/.sass-cache/a7698d69b32d4aea988cb8212cb0e0ca185c17ec/main.sassc b/plugins/SealModelMuseusSBM/assets/css/.sass-cache/a7698d69b32d4aea988cb8212cb0e0ca185c17ec/main.sassc[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/assets/css/.sass-cache/c152594775f44791d8f19bcb03b782041bf999c3/main.sassc b/plugins/SealModelMuseusSBM/assets/css/.sass-cache/c152594775f44791d8f19bcb03b782041bf999c3/main.sassc[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/assets/css/.sass-cache/f855b19756b121eb80e244cf0ef2945ba4a14ca6/main.sassc b/plugins/SealModelMuseusSBM/assets/css/.sass-cache/f855b19756b121eb80e244cf0ef2945ba4a14ca6/main.sassc[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/assets/css/model-tab-museus-sbm.css b/plugins/SealModelMuseusSBM/assets/css/model-tab-museus-sbm.css[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/assets/css/model-tab-museus-sbm.css.map b/plugins/SealModelMuseusSBM/assets/css/model-tab-museus-sbm.css.map[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/assets/css/sass/main.sass b/plugins/SealModelMuseusSBM/assets/css/sass/main.sass[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/assets/img/modelo_certificado_museus_sbm.jpg b/plugins/SealModelMuseusSBM/assets/img/modelo_certificado_museus_sbm.jpg[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/assets/img/preview-model-museus-sbm.png b/plugins/SealModelMuseusSBM/assets/img/preview-model-museus-sbm.png[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/printsealrelation.php b/plugins/SealModelMuseusSBM/printsealrelation.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/plugins/SealModelMuseusSBM/views/printsealrelation.php b/plugins/SealModelMuseusSBM/views/printsealrelation.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/space-types.php b/space-types.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/views/panel/seals.php b/views/panel/seals.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/views/site/search.php b/views/site/search.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
+[1mdiff --git a/views/space/single.php b/views/space/single.php[m
+[1mold mode 100644[m
+[1mnew mode 100755[m
