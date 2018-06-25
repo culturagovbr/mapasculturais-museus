@@ -18,6 +18,7 @@ class Theme extends BaseMinc\Theme {
             'site: by the site owner' => 'pelo Ministério da Cultura',
             'home: abbreviation' => "SNB",
             'home: title' => "Bem-vind@!",
+            'search: verified results' => 'Museus Cadastrados',
 //            'home: colabore' => "Colabore com o Mapas Culturais",
 //             'home: welcome' => "Bem-vindo ao <strong>Museus BR</strong> - a maior plataforma de informações sobre os museus existentes no Brasil.<br><br>
 
