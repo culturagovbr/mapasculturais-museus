@@ -291,10 +291,15 @@ class Theme extends BaseMinc\Theme {
                 ],
                 'options' => []
             ];
-
+            
             foreach($seals as $seal) {
-                $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
+                if($seal->name != 'Registro de Museus')
+                    $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
+                else
+                    $first_seal = ['value' => $seal->id, 'label' => $seal->name];
             }
+            
+            array_unshift($seal_filter['options'],$first_seal);
 
             $filters['space']['seal'] = $seal_filter;
         });
