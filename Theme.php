@@ -12,13 +12,14 @@ class Theme extends BaseMinc\Theme {
     protected static function _getTexts() {
         return array(
             'site: name' => 'Museus',
-            'site: in the region' => 'SNB',
-            'site: of the region' => 'SNB',
-            'site: owner' => 'SNB',
+            'site: in the region' => 'Ibram',
+            'site: of the region' => 'Ibram',
+            'site: owner' => 'Ibram',
             'site: by the site owner' => 'pelo Ministério da Cultura',
-            'home: abbreviation' => "SNB",
+            'home: abbreviation' => "Ibram",
             'home: title' => "Bem-vind@!",
             'search: verified results' => 'Museus Cadastrados',
+            'entities: registered spaces' => 'museus mapeados',
 //            'home: colabore' => "Colabore com o Mapas Culturais",
 //             'home: welcome' => "Bem-vindo ao <strong>Museus BR</strong> - a maior plataforma de informações sobre os museus existentes no Brasil.<br><br>
 
