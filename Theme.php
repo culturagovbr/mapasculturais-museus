@@ -920,7 +920,10 @@ class Theme extends BaseMinc\Theme {
                     'Exato',
                     'Aproximado'
                 ]
-            ]
+            ],
+            'territorioCultural' => [
+                'label' => 'Território Cultural (para utilização do Sistema de Museus)'
+            ],
         ];
     }
 
