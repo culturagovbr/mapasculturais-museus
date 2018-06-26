@@ -288,7 +288,7 @@ class Theme extends BaseMinc\Theme {
                 'isInline' => false,
                 'filter' => [
                     'param' => '@seals',
-                    'value' => '{val}'
+                    'value' => 'AND({val})'
                 ],
                 'options' => []
             ];
