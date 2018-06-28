@@ -983,7 +983,7 @@ class Theme extends BaseMinc\Theme {
     * @param type $entity_class
     * @return \MapasCulturais\Entity
     */
-    function getOneVerifiedEntity($entity_class) {
+    function _getOneVerifiedEntity($entity_class) {
         $app = \MapasCulturais\App::i();
 
         $cache_id = __METHOD__ . ':' . $entity_class;
