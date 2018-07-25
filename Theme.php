@@ -19,53 +19,7 @@ class Theme extends BaseMinc\Theme {
             'home: abbreviation' => "Ibram",
             'home: title' => "Bem-vind@!",
             'search: verified results' => 'Museus Cadastrados',
-            'entities: registered spaces' => 'museus mapeados',
-//            'home: colabore' => "Colabore com o Mapas Culturais",
-//             'home: welcome' => "Bem-vindo ao <strong>Museus BR</strong> - a maior plataforma de informações sobre os museus existentes no Brasil.<br><br>
-
-// Você vai descobrir que nosso país é muito rico e que tem museus para todos os gostos e interesses. Em Museus BR você encontrará Museus de Arte, de História, de Ciências, de Antropologia, Museus Comunitários, Museus de Território, Museus das mais variadas temáticas e muitos outros que você sequer imagina.<br><br>
-
-// Aqui você verificará onde estão localizados os museus do seu estado, do seu município ou de qualquer outro lugar de seu interesse, encontrando os dados de contato e serviços oferecidos como: visitas guiadas, acessibilidade, bibliotecas, arquivos, atendimento a visitantes estrangeiros e muito mais.<br><br>
-
-// Seja qual for a pesquisa, a Plataforma Museus BR permitirá extrair os dados dos museus em formato de planilha, por meio de filtros e cruzamentos. <br><br>
-
-// Como a Plataforma é colaborativa, você também pode participar, indicando um museu que você conheça e que ainda não faça parte da Museus BR, ou atualizando alguma informação. Basta seguir os passos na seção Como Participar. <br><br>
-
-// Aventure-se!<br>
-// Participe!<br>
-// Descubra o Brasil por meio dos seus museus!<br>
-
-// <p style='text-align:right'>Rede Nacional de Identificação de Museus</p>",
-// //            'home: events' => "Você pode pesquisar eventos culturais nos campos de busca combinada. Como usuário cadastrado, você pode incluir seus eventos na plataforma e divulgá-los gratuitamente.",
-// //            'home: agents' => "Você pode colaborar na gestão da cultura com suas próprias informações, preenchendo seu perfil de agente cultural. Neste espaço, estão registrados artistas, gestores e produtores; uma rede de atores envolvidos na cena cultural paulistana. Você pode cadastrar um ou mais agentes (grupos, coletivos, bandas instituições, empresas, etc.), além de associar ao seu perfil eventos e espaços culturais com divulgação gratuita.",
-//             'home: spaces' => "Procure os museus incluídos na plataforma, acessando os campos de busca combinado que ajudam na precisão de sua pesqusia.",
-// //            'home: projects' => "Reúne projetos culturais ou agrupa eventos de todos os tipos. Neste espaço, você encontra leis de fomento, mostras, convocatórias e editais criados, além de diversas iniciativas cadastradas pelos usuários da plataforma. Cadastre-se e divulgue seus projetos.",
-// //            'home: home_devs' => 'Existem algumas maneiras de desenvolvedores interagirem com o Mapas Culturais. A primeira é através da nossa <a href="https://github.com/hacklabr/mapasculturais/blob/master/doc/api.md" target="_blank">API</a>. Com ela você pode acessar os dados públicos no nosso banco de dados e utilizá-los para desenvolver aplicações externas. Além disso, o Mapas Culturais é construído a partir do sofware livre <a href="http://institutotim.org.br/project/mapas-culturais/" target="_blank">Mapas Culturais</a>, criado em parceria com o <a href="http://institutotim.org.br" target="_blank">Instituto TIM</a>, e você pode contribuir para o seu desenvolvimento através do <a href="https://github.com/hacklabr/mapasculturais/" target="_blank">GitHub</a>.',
-// //
-// //            'search: verified results' => 'Resultados Verificados',
-// //            'search: verified' => "Verificado
-
-
-//             'entities: Spaces of the agent'=> 'Museus do agente',
-//             'entities: Space Description'=> 'Descrição do Museu',
-//             'entities: My Spaces'=> 'Meus Museus',
-//             'entities: My spaces'=> 'Meus museus',
-
-//             'entities: no registered spaces'=> 'nenhum museu cadastrado',
-//             'entities: no spaces'=> 'nenhum museu',
-
-//             'entities: Space' => 'Museu',
-//             'entities: Spaces' => 'Museus',
-//             'entities: space' => 'museu',
-//             'entities: spaces' => 'museus',
-//             'entities: parent space' => 'museu matriz',
-//             'entities: a space' => 'um museu',
-//             'entities: the space' => 'o museu',
-//             'entities: of the space' => 'do museu',
-//             'entities: In this space' => 'Neste museu',
-//             'entities: in this space' => 'neste museu',
-//             'entities: registered spaces' => 'Museus Identificados',
-//             'entities: new space' => 'novo museu',
+            'entities: registered spaces' => 'museus mapeados'
         );
     }
 
@@ -83,7 +37,7 @@ class Theme extends BaseMinc\Theme {
             //     $api_params['owner'] = 'EQ('.$app->config['museus.ownerAgentId'].')';
         });
 
-//         desconsidera o site de origem da entidade
+        // desconsidera o site de origem da entidade
         $app->hook('entity(space).isUserAdmin(<<*>>)', function($user, $role, &$result){
             if($user->is($role)){
                 if($this->isNew() || ($this->getType() !== null && $this->getType()->id >= 60 && $this->getType()->id <= 69)){
@@ -203,6 +157,16 @@ class Theme extends BaseMinc\Theme {
         $app->hook('template(space.<<*>>.location):after', function(){
             $this->enqueueScript('app', 'endereco-correspondencia', 'js/endereco-correspondencia.js');
             $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
+        });
+
+        $app->hook('template(space.<<*>>.location-info):after', function() use($app){
+            $_metadataSpace = $app->getRegisteredMetadata('MapasCulturais\Entities\Space');
+            echo '<p>
+                <span class="label">' . \MapasCulturais\i::__($_metadataSpace['mus_territorioCultural']->label) . ':</span>
+                <span class="js-editable" data-edit="mus_territorioCultural" data-original-title="' . \MapasCulturais\i::__($_metadataSpace['mus_territorioCultural']->label). '" data-emptytext="Informe">' .
+                    $this->data->entity->mus_territorioCultural
+                . '</span>
+            </p>';
         });
 
         //Seal relation hook. Metadados não listados no core podem ser impressos aqui
@@ -975,57 +939,6 @@ class Theme extends BaseMinc\Theme {
         ];
         foreach($add_project_types as $k => $v)
             $app->registerEntityType(new Definitions\EntityType('MapasCulturais\Entities\Project', $k, $v));
-    }
-
-
-    /**
-    * Returns a verified entity
-    * @param type $entity_class
-    * @return \MapasCulturais\Entity
-    */
-    function _getOneVerifiedEntity($entity_class) {
-        $app = \MapasCulturais\App::i();
-
-        $cache_id = __METHOD__ . ':' . $entity_class;
-
-        if($app->cache->contains($cache_id)){
-            return $app->cache->fetch($cache_id);
-        }
-
-
-
-        $controller = $app->getControllerByEntity($entity_class);
-
-        if ($entity_class === 'MapasCulturais\Entities\Event') {
-            $entities = $controller->apiQueryByLocation([
-                '@from' => date('Y-m-d'),
-                '@to' => date('Y-m-d', time() + 28 * 24 * 3600),
-                '@verified' => '1',
-                '@select' => 'id'
-            ]);
-
-        } else {
-            $entities = $controller->apiQuery([
-                '@select' => 'id',
-                '@verified' => 'IN(1)',
-            ]);
-        }
-
-        $ids = array_map(function($item) {
-            return $item['id'];
-        }, $entities);
-
-        if ($ids) {
-            $id = $ids[array_rand($ids)];
-            $result = $app->repo($entity_class)->find($id);
-            $result->refresh();
-        } else {
-            $result = null;
-        }
-
-        $app->cache->save($cache_id, $result, 120);
-
-        return $result;
     }
 
     protected function _getFilters(){
