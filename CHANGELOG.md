@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## [1.4.0] - 26-07-2018
 - Troca o nome do botão "resultados verificados" para "museus cadastrados" ([#86](https://github.com/culturagovbr/mapasculturais-museus/issues/86));
 - Corrige erro na página principal, onde aparecia informação do SBN ([#69](https://github.com/culturagovbr/mapasculturais-museus/issues/69));
 - Ordenar filtros de selos ([#97](https://github.com/culturagovbr/mapasculturais-museus/issues/97));
