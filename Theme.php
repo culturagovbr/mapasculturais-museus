@@ -12,12 +12,14 @@ class Theme extends BaseMinc\Theme {
     protected static function _getTexts() {
         return array(
             'site: name' => 'Museus',
-            'site: in the region' => 'SNB',
-            'site: of the region' => 'SNB',
-            'site: owner' => 'SNB',
+            'site: in the region' => 'Ibram',
+            'site: of the region' => 'Ibram',
+            'site: owner' => 'Ibram',
             'site: by the site owner' => 'pelo Ministério da Cultura',
-            'home: abbreviation' => "SNB",
+            'home: abbreviation' => "Ibram",
             'home: title' => "Bem-vind@!",
+            'search: verified results' => 'Museus Cadastrados',
+            'entities: registered spaces' => 'museus mapeados',
 //            'home: colabore' => "Colabore com o Mapas Culturais",
 //             'home: welcome' => "Bem-vindo ao <strong>Museus BR</strong> - a maior plataforma de informações sobre os museus existentes no Brasil.<br><br>
 
@@ -186,6 +188,18 @@ class Theme extends BaseMinc\Theme {
         <?php
         });
 
+        $app->hook('mapasculturais.add_entity_modal', function ($meta, &$show_meta, &$class) {
+            $_base = "mus_EnCorrespondencia_";
+            $_key = $meta->key;
+            if (isset($_key)) {
+                if ($_base . "mesmo" === $_key) {
+                    $show_meta = true;
+                } else if (substr($_key, 0, strlen($_base)) === $_base) {
+                    $class .= " en-correspondencia";
+                }
+            }
+        });
+
         $app->hook('template(space.<<*>>.location):after', function(){
             $this->enqueueScript('app', 'endereco-correspondencia', 'js/endereco-correspondencia.js');
             $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
@@ -218,7 +232,7 @@ class Theme extends BaseMinc\Theme {
         //     $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
         // });
         
-        $app->hook('mapasculturais.scripts', function() use($app, $plugin){
+        $app->hook('mapasculturais.scripts', function() use($app){
             echo "<script type='text/javascript'>
                     if(MapasCulturais.mode !== 'development'){
                         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -228,7 +242,7 @@ class Theme extends BaseMinc\Theme {
 
                         ga('create', 'UA-87133854-1', 'auto');
                         ga('send', 'pageview');
-                    }
+                    }                    
                 </script>";
         });
 
@@ -274,17 +288,24 @@ class Theme extends BaseMinc\Theme {
                 'isInline' => false,
                 'filter' => [
                     'param' => '@seals',
-                    'value' => '{val}'
+                    'value' => 'AND({val})'
                 ],
                 'options' => []
             ];
-
+            
             foreach($seals as $seal) {
-                $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
+                if($seal->name != 'Registro de Museus')
+                    $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
+                else
+                    $first_seal = ['value' => $seal->id, 'label' => $seal->name];
             }
+            
+            array_unshift($seal_filter['options'],$first_seal);
 
             $filters['space']['seal'] = $seal_filter;
         });
+
+        $this->enqueueScript('app', 'modal-museu', 'js/modal-museu.js');
     }
 
     static function getThemeFolder() {
@@ -899,7 +920,10 @@ class Theme extends BaseMinc\Theme {
                     'Exato',
                     'Aproximado'
                 ]
-            ]
+            ],
+            'territorioCultural' => [
+                'label' => 'Território Cultural (para utilização do Sistema de Museus)'
+            ],
         ];
     }
 
@@ -959,7 +983,7 @@ class Theme extends BaseMinc\Theme {
     * @param type $entity_class
     * @return \MapasCulturais\Entity
     */
-    function getOneVerifiedEntity($entity_class) {
+    function _getOneVerifiedEntity($entity_class) {
         $app = \MapasCulturais\App::i();
 
         $cache_id = __METHOD__ . ':' . $entity_class;
