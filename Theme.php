@@ -25,6 +25,7 @@ class Theme extends BaseMinc\Theme {
 
     public function _init() {
         $app = App::i();
+        $app->registerController('registromuseus', 'MapasMuseus\Controllers\RegistroMuseus');
 
         /*
          *  Modifica a consulta da API de espaços para só retornar Museus
@@ -270,6 +271,29 @@ class Theme extends BaseMinc\Theme {
         });
 
         $this->enqueueScript('app', 'modal-museu', 'js/modal-museu.js');
+
+        $app->hook('GET(registromuseus)', function() use($app){
+            $this->assetManager->publishAsset('img/registromuseu.gif');
+            echo '<img src="' . $this->asset('img/logo-site.png') . '" />';
+            // $spaceEntity = $app->view->controller->requestedEntity;
+            // $metas = $spaceEntity->getMetadata();
+            // 
+            // $_metadataSpace = $app->getRegisteredMetadata('MapasCulturais\Entities\Space');
+            // 
+            // foreach ($metas as $k => $meta) {
+            //     if(!isset($_metadataSpace[$k])) continue;
+            //     if(preg_match('/^fva/m', $k)) continue;
+            //     echo "<b>" . \MapasCulturais\i::__($_metadataSpace[$k]->label) . ":</b><br>";
+            //     echo $meta . "<br><br>";
+            // }
+            // 
+            // echo '<p style="page-break-before:always"></p>';
+            // 
+            // echo '<div style="max-width: 800px;line-height: 2;text-align: justify;">
+            // Eu, ______________________________________________, portador do RG _________________, expedido em ______________, pelo órgão _________________, inscrito no CPF sob o nº ________________, residente e domiciliado em ________________________________________________________, no município de _________________________________, estado de _______, declaro para fins da Política Nacional de Museus que sou responsável legal pelo Museu ______________________________________________________________, situado à ___________________________________________________________, no município de _______________________________________________, no estado de _________, e que tenho ciência do Estatuto de Museus, instituído pela Lei nº 11.904, de 14 de janeiro de 2009, e de seu respectivo Decreto regulamentador, nº 8.124, de 17 de outrubro de 2013, e das demais normas federais referentes à Legislação Museológica.
+            // Por ser verdade as informações prestadas, solicito o Registro do referido Museu e comprometo-me a manter as informações desta instiuição requerente, atualizadas junto à entidade registradora de origem.
+            // </div>';
+        });
     }
 
     static function getThemeFolder() {
