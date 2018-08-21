@@ -44,7 +44,7 @@ $child_entity_request = isset($child_entity_request) ? $child_entity_request : n
         <!--.header-content-->
         <?php $this->applyTemplateHook('header-content','after'); ?>
         <?php if($this->isEditable()): ?>
-            <form method="POST" action="<?php echo $app->createUrl('registromuseus'); ?>" target="_blank">
+            <form method="POST" action="<?php echo $app->createUrl('registromuseus','impressao'); ?>" target="_blank">
                 <input type="hidden" name="id" value="<?php echo $entity->id; ?>">
                 <input type="submit" class="btn btn-primary" style="margin-top:30px" value="Imprimir Registro de Museus" />
             </form>
