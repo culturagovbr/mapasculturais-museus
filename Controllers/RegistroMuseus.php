@@ -37,11 +37,10 @@ class RegistroMuseus extends \MapasCulturais\Controller{
         $space = $app->repo('Space')->find($id);
         
         $metas = $space->getMetadata();
-        // var_dump($metas);
         
         $_metadataSpace = $app->getRegisteredMetadata('MapasCulturais\Entities\Space');
         
-        $html = "";
+        $html = "<b>Nome do Museu:</b> " . $space->name . "<hr>";
         foreach ($metas as $k => $meta) {
             if(!isset($_metadataSpace[$k])) continue;
             if(preg_match('/^fva/m', $k)) continue;
