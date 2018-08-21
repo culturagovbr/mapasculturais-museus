@@ -9,20 +9,6 @@ use MapasCulturais\i;
 
 class Theme extends BaseMinc\Theme {
 
-    protected static function _getTexts() {
-        return array(
-            'site: name' => 'Museus',
-            'site: in the region' => 'Ibram',
-            'site: of the region' => 'Ibram',
-            'site: owner' => 'Ibram',
-            'site: by the site owner' => 'pelo Ministério da Cultura',
-            'home: abbreviation' => "Ibram",
-            'home: title' => "Bem-vind@!",
-            'search: verified results' => 'Museus Cadastrados',
-            'entities: registered spaces' => 'museus mapeados'
-        );
-    }
-
     public function _init() {
         $app = App::i();
 
