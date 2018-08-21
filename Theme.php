@@ -225,6 +225,7 @@ class Theme extends BaseMinc\Theme {
                         'Formulário de Visitação Anual - 2015',
                         'Formulário de Visitação Anual - 2016',
                         'Registro de Museus',
+                        'Museu Cadastrado'
                     )
                 )
             );
@@ -244,13 +245,16 @@ class Theme extends BaseMinc\Theme {
             ];
             
             foreach($seals as $seal) {
-                if($seal->name != 'Registro de Museus')
-                    $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
-                else
+                if($seal->name != 'Registro de Museus'){
+                    if($seal->name == 'Museu Cadastrado')
+                        $second_seal = ['value' => $seal->id, 'label' => $seal->name];
+                    else
+                        $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
+                }else
                     $first_seal = ['value' => $seal->id, 'label' => $seal->name];
             }
             
-            array_unshift($seal_filter['options'],$first_seal);
+            array_unshift($seal_filter['options'],$first_seal,$second_seal);
 
             $filters['space']['seal'] = $seal_filter;
         });
