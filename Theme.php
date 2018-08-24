@@ -218,7 +218,7 @@ class Theme extends BaseMinc\Theme {
         //     $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
         // });
         
-        $app->hook('mapasculturais.scripts', function() use($app, $plugin){
+        $app->hook('mapasculturais.scripts', function() use($app){
             echo "<script type='text/javascript'>
                     if(MapasCulturais.mode !== 'development'){
                         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
