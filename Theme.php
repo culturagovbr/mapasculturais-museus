@@ -262,9 +262,10 @@ class Theme extends BaseMinc\Theme {
                     $first_seal = ['value' => $seal->id, 'label' => $seal->name];
             }
 
-            usort($seal_filter['options'], function($a, $b) {
-                return $a['label'] <=> $b['label'];
-            });
+            // Funciona a partir do php 7
+            // usort($seal_filter['options'], function($a, $b) {
+            //     return $a['label'] <=> $b['label'];
+            // });
             array_unshift($seal_filter['options'],$first_seal,$second_seal);
 
             $filters['space']['seal'] = $seal_filter;
