@@ -220,13 +220,21 @@ class Theme extends BaseMinc\Theme {
 
         //Filtragem de museus por selos
         $app->hook('search.filters', function(&$filters) use($app) {
-            $seals = \MapasCulturais\App::i()->repo('Seal')->findBy(array('name' => array(
-                        'Formulário de Visitação Anual - 2014', 
-                        'Formulário de Visitação Anual - 2015',
-                        'Formulário de Visitação Anual - 2016',
+            //Seleciona todos os selos que iniciam com o nome 'Formulário de Visitação Anual - '
+            $dql = "SELECT u FROM MapasCulturais\Entities\Seal u WHERE u.name LIKE 'Formulário de Visitação Anual - %' ORDER BY u.name";
+
+            $query = \MapasCulturais\App::i()->em->createQuery($dql);
+            $sealsFvaQ = $query->getResult();
+
+            $sealsFvas = [];
+            foreach ($sealsFvaQ as $selo) {
+                $sealsFvas[] = $selo->name;
+            }
+
+            $seals = \MapasCulturais\App::i()->repo('Seal')->findBy(array('name' => array_merge($sealsFvas,array(
                         'Registro de Museus',
                         'Museu Cadastrado'
-                    )
+                    ))
                 )
             );
 
@@ -253,7 +261,10 @@ class Theme extends BaseMinc\Theme {
                 }else
                     $first_seal = ['value' => $seal->id, 'label' => $seal->name];
             }
-            
+
+            usort($seal_filter['options'], function($a, $b) {
+                return $a['label'] <=> $b['label'];
+            });
             array_unshift($seal_filter['options'],$first_seal,$second_seal);
 
             $filters['space']['seal'] = $seal_filter;
