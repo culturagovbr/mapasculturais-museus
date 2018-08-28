@@ -9,20 +9,6 @@ use MapasCulturais\i;
 
 class Theme extends BaseMinc\Theme {
 
-    protected static function _getTexts() {
-        return array(
-            'site: name' => 'Museus',
-            'site: in the region' => 'Ibram',
-            'site: of the region' => 'Ibram',
-            'site: owner' => 'Ibram',
-            'site: by the site owner' => 'pelo Ministério da Cultura',
-            'home: abbreviation' => "Ibram",
-            'home: title' => "Bem-vind@!",
-            'search: verified results' => 'Museus Cadastrados',
-            'entities: registered spaces' => 'museus mapeados'
-        );
-    }
-
     public function _init() {
         $app = App::i();
         $app->registerController('registromuseus', 'MapasMuseus\Controllers\RegistroMuseus');
@@ -235,12 +221,21 @@ class Theme extends BaseMinc\Theme {
 
         //Filtragem de museus por selos
         $app->hook('search.filters', function(&$filters) use($app) {
-            $seals = \MapasCulturais\App::i()->repo('Seal')->findBy(array('name' => array(
-                        'Formulário de Visitação Anual - 2014', 
-                        'Formulário de Visitação Anual - 2015',
-                        'Formulário de Visitação Anual - 2016',
+            //Seleciona todos os selos que iniciam com o nome 'Formulário de Visitação Anual - '
+            $dql = "SELECT u FROM MapasCulturais\Entities\Seal u WHERE u.name LIKE 'Formulário de Visitação Anual - %' ORDER BY u.name";
+
+            $query = \MapasCulturais\App::i()->em->createQuery($dql);
+            $sealsFvaQ = $query->getResult();
+
+            $sealsFvas = [];
+            foreach ($sealsFvaQ as $selo) {
+                $sealsFvas[] = $selo->name;
+            }
+
+            $seals = \MapasCulturais\App::i()->repo('Seal')->findBy(array('name' => array_merge($sealsFvas,array(
                         'Registro de Museus',
-                    )
+                        'Museu Cadastrado'
+                    ))
                 )
             );
 
@@ -253,19 +248,25 @@ class Theme extends BaseMinc\Theme {
                 'isInline' => false,
                 'filter' => [
                     'param' => '@seals',
-                    'value' => 'AND({val})'
+                    'value' => '{val}'
                 ],
                 'options' => []
             ];
             
             foreach($seals as $seal) {
-                if($seal->name != 'Registro de Museus')
-                    $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
-                else
+                if($seal->name != 'Registro de Museus'){
+                    if($seal->name == 'Museu Cadastrado')
+                        $second_seal = ['value' => $seal->id, 'label' => $seal->name];
+                    else
+                        $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
+                }else
                     $first_seal = ['value' => $seal->id, 'label' => $seal->name];
             }
-            
-            array_unshift($seal_filter['options'],$first_seal);
+
+            usort($seal_filter['options'], function($a, $b) {
+                return strcmp(strtolower($a['label']), strtolower($b['label']));
+            });
+            array_unshift($seal_filter['options'],$first_seal,$second_seal);
 
             $filters['space']['seal'] = $seal_filter;
         });
