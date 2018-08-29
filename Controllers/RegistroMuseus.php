@@ -38,12 +38,22 @@ class RegistroMuseus extends \MapasCulturais\Controller{
                         float:left;
                     }
                     h5{
-                        background-color: #899976;
-                        color: #fff;
+                        background-color: #CCCCCC;
+                        color: #000000;
                         padding: 5px;
                         font-weight: bold;
                         text-transform: uppercase;
                         margin-bottom: 0;
+                    }
+                    @media print {
+                        h5{
+                            background-color: #CCCCCC;
+                            color: #000000;
+                        }
+                    }
+                    * {
+                        -webkit-print-color-adjust: exact !important;
+                        color-adjust: exact !important;
                     }
                 </style>";
                 
@@ -52,6 +62,8 @@ class RegistroMuseus extends \MapasCulturais\Controller{
 
         $metasOrdem = array(
             'sobre' => array(
+                'Sobre',
+                'nome',
                 'site',
                 array(
                     'emailPublico',
@@ -65,6 +77,7 @@ class RegistroMuseus extends \MapasCulturais\Controller{
                 'endereco'
             ),
             'gestao' => array(
+                'Gestão',
                 array(
                     'esfera',
                     'esfera_tipo'
@@ -96,6 +109,7 @@ class RegistroMuseus extends \MapasCulturais\Controller{
                 )
             ),
             'caracterizacao' => array(
+                'Caracterização',
                 'mus_tipo',
                 'mus_itinerante',
                 'mus_caraterComunitario',
@@ -103,6 +117,7 @@ class RegistroMuseus extends \MapasCulturais\Controller{
                 'mus_tipo_tematica'
             ),
             'acervo' => array(
+                'Acervo',
                 'mus_acervo_propriedade',
                 'tipologia',
                 'mus_instr_documento',
@@ -111,40 +126,76 @@ class RegistroMuseus extends \MapasCulturais\Controller{
                     'mus_gestao_politicaAquisicao',
                     'mus_gestao_politicaDescarte'
                 )
+            ),
+            'publico' => array(
+                'Público, Acessibilidade e Serviços',
+                array(
+                    'mus_status',
+                    'museu_fechado'
+                ),
+                array(
+                    'mus_ingresso_cobrado',
+                    'mus_ingresso_valor'
+                ),
+                'horario',
+                'acessibilidade_fisica',
+                'mus_acessibilidade_visual',
+                'mus_servicos_atendimentoEstrangeiros',
+                'mus_instalacoes',
+                'mus_instalacoes_capacidadeAuditorio',
+                array(
+                    'mus_arquivo_possui',
+                    'mus_arquivo_acessoPublico'
+                ),
+                array(
+                    'mus_biblioteca_possui',
+                    'mus_biblioteca_acessoPublico'
+                ),
+                array(
+                    'mus_servicos_visitaGuiada',
+                    'mus_servicos_visitaGuiada_s'
+                ),
+                'mus_atividade_pub_especif',
+                'mus_atividade_pub_especif_s'
             )
         );
 
         $id = $app->view->controller->data['id'];
         $space = $app->repo('Space')->find($id);
-        // var_dump($space->terms['mus_area']);die;
 
         $metas = $space->getMetadata();
 
         $_metadataSpace = $app->getRegisteredMetadata('MapasCulturais\Entities\Space');
 
-        $html = "<table class='table-registromuseus'><tr><td><b>Nome do Museu:</b> " . $space->name . "</td></tr>";
-        foreach ($metas as $k => $meta) {
-            $metas[$k] = ($meta == 's') ? 'Sim' : $metas[$k];
-            $metas[$k] = ($meta == 'n') ? 'Não' : $metas[$k];
-            if(!isset($_metadataSpace[$k])) continue;
-            if(preg_match('/^fva/m', $k)) continue;
+        foreach ($_metadataSpace as $k => $meta) {
+            $metasSpace[$meta->key] = $_metadataSpace[$meta->key]->label;
 
-            if(strlen($_metadataSpace[$k]->label) >= 60)
-                $metas[$k] = '<br>' . $metas[$k];
+            if(!isset($metas[$meta->key])) continue;
 
-            $html .= "<tr><td><b>$k  --  " . \MapasCulturais\i::__($_metadataSpace[$k]->label) . ":</b> ";
-            $html .= $meta . "</td></tr>";
+            $metas[$meta->key] = ($metas[$meta->key] == 's') ? 'Sim' : $metas[$meta->key];
+            $metas[$meta->key] = ($metas[$meta->key] == 'n') ? 'Não' : $metas[$meta->key];
+
+            if(!isset($_metadataSpace[$meta->key]) && $meta->key != 'nome') continue;
+            if(preg_match('/^fva/m', $meta->key)) continue;
+
+            if(strlen($_metadataSpace[$meta->key]->label) >= 60)
+                $metas[$meta->key] = '<br>' . $metas[$meta->key];
+
         }
 
-        $metas['tipologia'] = implode($space->terms['mus_area'], ', ');
-        // var_dump($_metadataSpace);die;
-        $html .= "</td></tr></table>";
+        $metasSpace['tipologia'] = 'Tipologias de acervo existentes no museu:';
+        $metas['tipologia']      = implode($space->terms['mus_area'], ', ');
+
+        $metasSpace['nome'] = 'Nome do Museus';
+        $metas['nome']      = $space->name;
+
+        $metasSpace['museu_fechado'] = 'Em caso de museu fechado, qual a previsão de abertura?';
+        @$metas['museu_fechado']      = $metas['mus_previsao_abertura_mes'] . "/" . $metas['mus_previsao_abertura_ano'];
 
         $this->render('impressao',array(
-            'html'       => $html,
             'metasOrdem' => $metasOrdem,
             'metas'      => $metas,
-            'metasSpace' => $_metadataSpace,
+            'metasSpace' => $metasSpace,
             'entity'     => $space
         ));
     }
