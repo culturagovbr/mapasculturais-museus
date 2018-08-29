@@ -46,7 +46,7 @@ $child_entity_request = isset($child_entity_request) ? $child_entity_request : n
         <?php if($this->isEditable()): ?>
             <form method="POST" action="<?php echo $app->createUrl('registromuseus','impressao'); ?>" target="_blank">
                 <input type="hidden" name="id" value="<?php echo $entity->id; ?>">
-                <input type="submit" class="btn btn-primary" style="margin-top:30px" value="Imprimir Registro de Museus" />
+                <input type="submit" class="btn btn-primary" style="margin-top:30px" value="Imprimir Solicitação de Registro de Museus" />
             </form>
         <?php endif; ?>
     </header>
