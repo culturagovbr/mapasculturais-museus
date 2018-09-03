@@ -117,6 +117,7 @@ class Theme extends BaseMinc\Theme {
         $app->hook('template(space.<<create|edit|single>>.tabs-content):end', function(){
             $this->part('tab-publico', ['entity' => $this->data->entity]);
             $this->part('tab-mais', ['entity' => $this->data->entity]);
+            $this->part('tab-registro', ['entity' => $this->data->entity]);
         });
 
         $app->hook('template(space.<<create|edit|single>>.tab-about-service):begin', function(){

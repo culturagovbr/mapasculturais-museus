@@ -4,3 +4,4 @@
 </style>
 <li><a href="#tab-publico">Público</a></li>
 <li><a href="#tab-mais">Mais Info</a></li>
+<li><a href="#tab-registro">Solicitar Registro de Museus</a></li>

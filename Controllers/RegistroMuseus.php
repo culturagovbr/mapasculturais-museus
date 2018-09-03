@@ -45,10 +45,19 @@ class RegistroMuseus extends \MapasCulturais\Controller{
                         text-transform: uppercase;
                         margin-bottom: 0;
                     }
+                    .box-importante-registromuseus{
+                        padding: 20px;
+                        background: #dfdfdf;
+                        margin-top: 30px;
+                        font-size: 11px;
+                    }
                     @media print {
                         h5{
                             background-color: #CCCCCC;
                             color: #000000;
+                        }
+                        .box-importante-registromuseus{
+                            background: #dfdfdf;
                         }
                     }
                     * {
@@ -190,7 +199,7 @@ class RegistroMuseus extends \MapasCulturais\Controller{
         $metas['nome']      = $space->name;
 
         $metasSpace['museu_fechado'] = 'Em caso de museu fechado, qual a previsão de abertura?';
-        @$metas['museu_fechado']      = $metas['mus_previsao_abertura_mes'] . "/" . $metas['mus_previsao_abertura_ano'];
+        @$metas['museu_fechado']     = $metas['mus_previsao_abertura_mes'] . "/" . $metas['mus_previsao_abertura_ano'];
 
         $this->render('impressao',array(
             'metasOrdem' => $metasOrdem,

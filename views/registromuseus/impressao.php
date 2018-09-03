@@ -35,7 +35,16 @@
             Eu, ______________________________________________, portador do RG _________________, expedido em ______________, pelo órgão _________________, inscrito no CPF sob o nº ________________, residente e domiciliado em ________________________________________________________, no município de _________________________________, estado de _______, declaro para fins da Política Nacional de Museus que sou responsável legal pelo Museu ______________________________________________________________, situado à ___________________________________________________________, no município de _______________________________________________, no estado de _________, e que tenho ciência do Estatuto de Museus, instituído pela Lei nº 11.904, de 14 de janeiro de 2009, e de seu respectivo Decreto regulamentador, nº 8.124, de 17 de outrubro de 2013, e das demais normas federais referentes à Legislação Museológica.
             Por ser verdade as informações prestadas, solicito o Registro do referido Museu e comprometo-me a manter as informações desta instiuição requerente, atualizadas junto à entidade registradora de origem.
 
-            <div style="text-align:center;margin-top: 60px;">
+            <p class="box-importante-registromuseus">
+                Acompanham Este Termo de Solicitação do Registro preenchido e assinado os seguintes documentos:<br><br>
+
+                • CPF e RG (autenticados em cartório) do responsável pelo museu;<br>
+                • Documentação que comprove que o titular do RG e do CPF enviados é o responsável pelo museu, que poderá ser através de termo de posse, ato de nomeação, ou outro documento congênere;<br>
+                • CNPJ do museu ou da instituição mantenedora;<br>
+                • Instrumento de criação do museu ou outro documento oficial da instituição à qual o museu esteja subordinado/vinculado;
+            </p>
+
+            <div style="text-align:center;margin-top: 40px;">
                 <p>
                     ________________________________________________<br>
                     (Assinatura do solicitante)
