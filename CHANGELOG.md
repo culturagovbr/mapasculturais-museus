@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.4.2] - 16-08-2018
+## [1.4.2] - 03-09-2018
 - Retira do tema, a função que sobreescrevia textos editáveis, que hoje são alterados pelo painel do subiste;
 - Bugfix ao chamar hook mapasculturais.script;
 - Insere dinamicamente ao filtro por selos, todos os selos do FVA, ordenados por anos ([#91](https://github.com/culturagovbr/mapasculturais-museus/issues/91));
