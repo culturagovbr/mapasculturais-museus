@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.4.2] - 03-09-2018
+- Retira do tema, a função que sobreescrevia textos editáveis, que hoje são alterados pelo painel do subiste;
+- Bugfix ao chamar hook mapasculturais.script;
+- Insere dinamicamente ao filtro por selos, todos os selos do FVA, ordenados por anos ([#91](https://github.com/culturagovbr/mapasculturais-museus/issues/91));
+- Adiciona o selo Museu Cadastrado ao filtro por selos ([#105](https://github.com/culturagovbr/mapasculturais-museus/issues/105));
+- Aplica o selo FVA 2017 e Resultados Verificados;
+
+## [1.4.1] - 16-08-2018
+- Bugfix no filtro de selos. Retorna o modo de busca na api por OR
+
 ## [1.4.0] - 26-07-2018
 - Troca o nome do botão "resultados verificados" para "museus cadastrados" ([#86](https://github.com/culturagovbr/mapasculturais-museus/issues/86));
 - Corrige erro na página principal, onde aparecia informação do SBN ([#69](https://github.com/culturagovbr/mapasculturais-museus/issues/69));

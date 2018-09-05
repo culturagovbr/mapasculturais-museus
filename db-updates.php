@@ -1190,5 +1190,42 @@ return [
         }
         
         echo "{$spaceCounter} espaços normalizados com sucesso!";
+    },
+    'mus: adiciona selo fva 2017' => function() use($app, $conn){
+        $agent = $app->config['museus.ownerAgentId'];
+        //FVA 2017 http://museus.cultura.gov.br/selo/42/
+        $seal_id = 42;
+
+        $museus = $app->repo('SpaceMeta')->findBy(array('key' => 'fva2017'));
+        $countFVA = 0;
+
+        foreach ($museus as $museu) {
+            $dql = "INSERT INTO seal_relation(
+                    id, seal_id, object_id, create_timestamp, status, object_type, agent_id, owner_id, validate_date)
+                    VALUES (nextval('seal_relation_id_seq'), $seal_id, " . $museu->owner->id . ", now(), 1, 'MapasCulturais\Entities\Space', 1, $agent, now());";
+            if($conn->executeQuery($dql))
+                $countFVA++;
+        }
+
+        echo "$countFVA selos do FVA 2017 aplicados.\n\n";
+    },
+    'mus: Insere o selo Resultados Verificados para todos os espaços que já possuem o selo Museu Cadastrado' => function() use($app, $conn){
+        $agent = $app->config['museus.ownerAgentId'];
+        $seloResultadosVerificados = 41;
+        $seloMuseuCadastrado       = 24;
+
+        $seal    = $app->repo('Seal')->find($seloMuseuCadastrado);
+
+        $spaces = $app->repo('SpaceSealRelation')->findBy(array('seal' => $seal));
+        $countSpaces = 0;
+        foreach ($spaces as $space) {
+            $dql = "INSERT INTO seal_relation(
+                    id, seal_id, object_id, create_timestamp, status, object_type, agent_id, owner_id, validate_date)
+                    VALUES (nextval('seal_relation_id_seq'), $seloResultadosVerificados, " . $space->owner->id . ", now(), 1, 'MapasCulturais\Entities\Space', 1, $agent, now());";
+            if($conn->executeQuery($dql))
+                $countSpaces++;
+        }
+
+        echo "$countSpaces espaços com selos copiados.\n\n";
     }
 ];
