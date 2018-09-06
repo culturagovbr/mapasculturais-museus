@@ -10,6 +10,7 @@ return [
     'notifications.entities.update' => 0,
     'notifications.user.access'     => 182,
     'notifications.seal.toExpire'   => 0,
+    'museus.sealRegistroMuseu'      => 8,
     'routes' => [
         'readableNames' => [
             'impressao' => \MapasCulturais\i::__('Registro de Museus')

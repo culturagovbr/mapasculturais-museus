@@ -117,7 +117,9 @@ class Theme extends BaseMinc\Theme {
         $app->hook('template(space.<<create|edit|single>>.tabs-content):end', function(){
             $this->part('tab-publico', ['entity' => $this->data->entity]);
             $this->part('tab-mais', ['entity' => $this->data->entity]);
-            $this->part('tab-registro', ['entity' => $this->data->entity]);
+
+            if(self::checkSealRegistro() == 0)
+                $this->part('tab-registro', ['entity' => $this->data->entity]);
         });
 
         $app->hook('template(space.<<create|edit|single>>.tab-about-service):begin', function(){
@@ -1035,4 +1037,11 @@ class Theme extends BaseMinc\Theme {
           App::i()->applyHookBoundTo($this, 'search.filters', [&$filters]);
           return $filters;
       }
+
+    protected function checkSealRegistro(){
+        $dql = "SELECT COUNT(e) FROM \MapasCulturais\Entities\SpaceSealRelation e WHERE e.seal = " . App::i()->config['museus.sealRegistroMuseu'] . " AND e.objectId = " . $this->data->entity->id;
+        $query = App::i()->em->createQuery($dql);
+
+        return $query->getSingleScalarResult();
+    }
 }

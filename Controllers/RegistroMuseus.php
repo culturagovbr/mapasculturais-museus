@@ -66,7 +66,7 @@ class RegistroMuseus extends \MapasCulturais\Controller{
                     }
                 </style>";
                 
-            echo "<script type='text/javascript'>//window.print();</script>";
+            echo "<script type='text/javascript'>window.print();</script>";
         });
 
         $metasOrdem = array(

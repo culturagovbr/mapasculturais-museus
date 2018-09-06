@@ -6,6 +6,7 @@
         <li>2. Fotocopiar os documentos solicitados (vide lista abaixo de acordo com a natureza administrativa da instituição).</li>
         <li>3. Reunir o Formulário devidamente preenchido e a documentação solicitada e entregar a documentação na sede do Ibram em Brasília ou enviar por correio com aviso de recebimento para o seguinte endereço:
             <p>
+                <br>
                 Instituto Brasileiro de Museus – Ibram<br>
                 Cadastro Nacional de Museus (CNM)<br>
                 Setor Bancário Norte, Quadra 02, Bloco N, 1º Subsolo<br>
@@ -24,7 +25,7 @@
         <li>Instrumento de criação do museu ou outro documento oficial da instituição à qual o museu esteja subordinado/vinculado;</li>
         <li>Termo de Solicitação do Registro preenchido.</li>
     </ul>
-     
+
     <h6>Museu Público Estadual, Municipal e Distrital</h6>
     <ul>
         <li>CPF e RG (autenticados em cartório) do responsável pelo museu;</li>
@@ -50,4 +51,9 @@
         <li>No caso de inexistência de documento oficial que declare quem é o responsável pelo museu, será admitido como comprovação documento que contenha tal informação assinado pelo representante máximo da instituição mantenedora. Nessa situação, o representante máximo da instituição mantenedora deverá enviar cópia do seu RG, do CPF (autenticados em cartório) e documento oficial que declare sua ocupação neste cargo;</li>
         <li>Museus que possuem filiais ou seccionais em endereços de visitação diferentes deverão responder um questionário para cada unidade.</li>
     </ul>
+
+    <form method="POST" action="<?php echo $app->createUrl('registromuseus','impressao'); ?>" target="_blank">
+        <input type="hidden" name="id" value="<?php echo $entity->id; ?>">
+        <input type="submit" class="btn btn-primary" style="margin-top:30px" value="Imprimir Solicitação de Registro de Museus" />
+    </form>
 </div>
