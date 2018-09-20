@@ -265,7 +265,10 @@ class Theme extends BaseMinc\Theme {
             usort($seal_filter['options'], function($a, $b) {
                 return strcmp(strtolower($a['label']), strtolower($b['label']));
             });
-            array_unshift($seal_filter['options'],$first_seal,$second_seal);
+
+            if (isset($first_seal) && isset($second_seal)) {
+                array_unshift($seal_filter['options'],$first_seal,$second_seal);
+            }        
 
             $filters['space']['seal'] = $seal_filter;
         });
