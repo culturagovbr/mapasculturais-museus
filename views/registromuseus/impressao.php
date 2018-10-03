@@ -41,7 +41,13 @@
                 • CPF e RG (autenticados em cartório) do responsável pelo museu;<br>
                 • Documentação que comprove que o titular do RG e do CPF enviados é o responsável pelo museu, que poderá ser através de termo de posse, ato de nomeação, ou outro documento congênere;<br>
                 • CNPJ do museu ou da instituição mantenedora;<br>
-                • Instrumento de criação do museu ou outro documento oficial da instituição à qual o museu esteja subordinado/vinculado;
+                • Instrumento de criação do museu ou outro documento oficial da instituição à qual o museu esteja subordinado/vinculado;<br>
+                • Este formulário com todas as questões preenchidas e assinado pelo titular da documentação anexada;<br>
+
+                • As despesas de autenticação e envio deverão correr por conta do museu solicitante;<br>
+                • O museu deverá manter atualizados todos os seus dados junto ao Registro de Museus, enviando toda a documentação comprobatória de qualquer alteração das informações já fornecidas;<br>
+                • No caso de inexistência de documento oficial que declare quem é o responsável pelo museu, será admitido como comprovação documento que contenha tal informação assinado pelo representante máximo da instituição mantenedora. Nessa situação, o representante máximo da instituição mantenedora deverá enviar cópia do seu RG, do CPF (autenticados em cartório) e documento oficial que declare sua ocupação neste cargo;<br>
+                • Museus que possuem filiais ou seccionais em endereços de visitação diferentes deverão responder um questionário para cada unidade.<br>
             </p>
 
             <div style="text-align:center;margin-top: 40px;">
