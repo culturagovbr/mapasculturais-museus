@@ -107,7 +107,7 @@ class Theme extends BaseMinc\Theme {
             if($entity->mus_cod)
                 echo "<small><span class='label'>Código:</span> {$entity->mus_cod}</small>";
             else
-                echo "<small><span class=\"label\">Código: </span><span>Preencha os campos obrigatorios e clique em salvar para gerar</span></small>";
+                echo "<small><span class=\"label\">Código: </span><span>Preencha os campos obrigatórios e clique em salvar para gerar</span></small>";
         });
 
         $app->hook('template(space.<<create|edit|single>>.tabs):end', function(){
