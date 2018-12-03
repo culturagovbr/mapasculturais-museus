@@ -6,11 +6,13 @@ use BaseMinc;
 use MapasCulturais\App;
 use MapasCulturais\Definitions;
 use MapasCulturais\i;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 class Theme extends BaseMinc\Theme {
 
     public function _init() {
         $app = App::i();
+        $_self = $this;
         $app->registerController('registromuseus', 'MapasMuseus\Controllers\RegistroMuseus');
 
         /*
@@ -212,6 +214,44 @@ class Theme extends BaseMinc\Theme {
             $this->part( 'panel/highlighted-message--numsniic');
         });
 
+        $app->hook("API.find(space).result", function($p, &$result) use ($_self,$app) {
+            $rsm = new ResultSetMapping();
+            $rsm->addScalarResult('seal_id', 'id_selo_ibram');
+            $selosIBRAM = $_self->getIBRAMSeals($app);
+
+           if (is_array($result)) {
+               $i=0;
+               foreach ($result as $museu) {
+                   $dql = "SELECT seal_id FROM seal_relation WHERE object_id = ?";
+                   $query = $app->em->createNativeQuery($dql, $rsm);
+                   $query->setParameter(1, $museu["id"]);
+                   $selos_museu = $query->getResult(2);
+
+                   $selos = [];
+                   array_map(function ($s) use (&$selos) {
+                       $__d = $s["id_selo_ibram"];
+                       if (is_int($__d) && !is_null($__d)) {
+                           array_push($selos, $__d);
+                       }
+                   },$selos_museu);
+
+                   foreach ($selosIBRAM as $_selo) {
+                       $valor = "não";
+                       if (in_array($_selo->id, $selos))
+                           $valor = "sim";
+
+                       $result[$i][$_selo->name] = $valor;
+                   }
+                   $i++;
+               }
+           }
+        });
+
+        $app->hook('API.(space).result.extra-header-fields', function() use ($_self, $app) {
+            foreach ($_self->getIBRAMSeals($app) as $IBRAMSeal)
+                echo "<th> $IBRAMSeal->name </th>";
+        });
+
         /*
         $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
             $this->part('acessibilidade', ['entity' => $this->data->entity]);
@@ -278,6 +318,24 @@ class Theme extends BaseMinc\Theme {
         });
 
         $this->enqueueScript('app', 'modal-museu', 'js/modal-museu.js');
+    }
+
+
+    private function getIBRAMSeals($app) {
+        $dql = "SELECT u FROM MapasCulturais\Entities\Seal u WHERE u.name LIKE 'Formulário de Visitação Anual - %' ORDER BY u.name";
+        $query = $app->em->createQuery($dql);
+        $selosFVA = $query->getResult();
+
+        $registro_museus = $app->repo('Seal')->findBy(['name'=>'Registro de Museus']);
+        $museu_cadastrado = $app->repo('Seal')->findBy(['name'=>'Museu Cadastrado']);
+
+        if (is_array($registro_museus) && $registro_museus[0] instanceof \MapasCulturais\Entities\Seal)
+            $selosFVA[] = $registro_museus[0];
+
+        if (is_array($museu_cadastrado) && $museu_cadastrado[0] instanceof \MapasCulturais\Entities\Seal)
+            $selosFVA[] = $museu_cadastrado[0];
+
+        return $selosFVA;
     }
 
     static function getThemeFolder() {
