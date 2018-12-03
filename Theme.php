@@ -247,10 +247,12 @@ class Theme extends BaseMinc\Theme {
            }
         });
 
+        /*
+         * Não utilizado no momento
         $app->hook('API.(space).result.extra-header-fields', function() use ($_self, $app) {
             foreach ($_self->getIBRAMSeals($app) as $IBRAMSeal)
                 echo "<th> $IBRAMSeal->name </th>";
-        });
+        });*/
 
         /*
         $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
