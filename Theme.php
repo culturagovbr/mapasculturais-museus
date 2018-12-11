@@ -943,7 +943,9 @@ class Theme extends BaseMinc\Theme {
             ],
             'total_bens_culturais' => [
                 'label' => 'Informe o número total de bens culturais de caráter museológico que compõem o acervo:',
-                'type' => 'number'
+                'validations' => [
+                    'required' => \MapasCulturais\i::__('É obrigatório informar o total de bens culturais')
+                ]
             ],
             'exatidao_total_bens_culturais' => [
                 'label' => 'Informe o número total de bens culturais de caráter museológico que compõem o acervo:',

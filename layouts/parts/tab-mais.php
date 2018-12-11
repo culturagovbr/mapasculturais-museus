@@ -198,7 +198,7 @@ $show_tipologia = $this->isEditable() ||
             <span class="icon icon-private-info"></span>
             <span class="label">Informe o número total de bens culturais de caráter museológico que compõem o acervo:</span>
             <span>Não contabilizar bens culturais cujo processamento técnico é de caráter bibliográfico ou arquivístico.</span>
-            <span class="js-editable" data-type="number" data-edit="mus_total_bens_culturais" data-original-title="Informe o número total de bens culturais de caráter museológico que compõem o acervo:" data-emptytext="Informe">
+            <span class="js-editable" data-edit="mus_total_bens_culturais" data-original-title="Informe o número total de bens culturais de caráter museológico que compõem o acervo:" data-emptytext="Informe">
                 <?php echo $entity->mus_total_bens_culturais; ?>
             </span>
         </p>
