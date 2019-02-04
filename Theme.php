@@ -331,10 +331,10 @@ class Theme extends BaseMinc\Theme {
         $registro_museus = $app->repo('Seal')->findBy(['name'=>'Registro de Museus']);
         $museu_cadastrado = $app->repo('Seal')->findBy(['name'=>'Museu Cadastrado']);
 
-        if (is_array($registro_museus) && $registro_museus[0] instanceof \MapasCulturais\Entities\Seal)
+        if (is_array($registro_museus) && !empty($registro_museus) && $registro_museus[0] instanceof \MapasCulturais\Entities\Seal)
             $selosFVA[] = $registro_museus[0];
 
-        if (is_array($museu_cadastrado) && $museu_cadastrado[0] instanceof \MapasCulturais\Entities\Seal)
+        if (is_array($museu_cadastrado) && !empty($registro_museus) && $museu_cadastrado[0] instanceof \MapasCulturais\Entities\Seal)
             $selosFVA[] = $museu_cadastrado[0];
 
         return $selosFVA;
