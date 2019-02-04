@@ -90,27 +90,31 @@ $(function(){
      * Conta o número de warnings na tab 'sobre'
      * @return string
      */
-    function countSobreTab(){
-        var warnings = 0;
-        var enderecoCorrespondenciaMesmoVisitacao = $('#mus_EnCorrespondencia_mesmo').editable('getValue', true);
-        //conta warning para a descrição curta
-        $('#sobre > .ficha-spcultura > p').each(function(){
-            warnings += $(this).find('.danger').length;
-        });
-
-        //conta warnings de email divulgacao, telefone divulgação e endereço
-        $('#sobre > .ficha-spcultura > .servico').each(function(){
-            warnings += $(this).find('.danger').length;
-        });
-
-        //conta erros do endereço de correspondência
-        if(enderecoCorrespondenciaMesmoVisitacao === 'não'){
-            $('#sobre > .ficha-spcultura > #endereco-correspondencia > .js-endereco-correspondencia > p').each(function(){
+    function countSobreTab() {
+        if ($('#mus_EnCorrespondencia_mesmo').length > 0) {
+            var warnings = 0;
+            var enderecoCorrespondenciaMesmoVisitacao = $('#mus_EnCorrespondencia_mesmo').editable('getValue', true);
+            //conta warning para a descrição curta
+            $('#sobre > .ficha-spcultura > p').each(function(){
                 warnings += $(this).find('.danger').length;
             });
+
+            //conta warnings de email divulgacao, telefone divulgação e endereço
+            $('#sobre > .ficha-spcultura > .servico').each(function(){
+                warnings += $(this).find('.danger').length;
+            });
+
+            //conta erros do endereço de correspondência
+            if(enderecoCorrespondenciaMesmoVisitacao === 'não'){
+                $('#sobre > .ficha-spcultura > #endereco-correspondencia > .js-endereco-correspondencia > p').each(function(){
+                    warnings += $(this).find('.danger').length;
+                });
+            }
+
+            return warnings;
         }
 
-        return warnings;
+        return false;
     }
     
     function concatena_enderco(){
@@ -198,30 +202,32 @@ $(function(){
      * seja preenchido com os mesmos valores do endereço do museu caso a opção de 'mesmo endereço de correspondencia'
      * esteja marcado como 'sim'
      */
-    function checkMailAddress(){
-        var showEnderecoCorrespondencia = $('#mus_EnCorrespondencia_mesmo').editable('getValue', true);
+    function checkMailAddress() {
+        if ($('#mus_EnCorrespondencia_mesmo').length > 0) {
 
-        if(showEnderecoCorrespondencia == 'sim'){
-            var cep = $('#En_CEP').editable('getValue', true);
-            $('#mus_EnCorrespondencia_CEP').editable('setValue', cep);
+            var showEnderecoCorrespondencia = $('#mus_EnCorrespondencia_mesmo').editable('getValue', true);
+            if(showEnderecoCorrespondencia == 'sim'){
+                var cep = $('#En_CEP').editable('getValue', true);
+                $('#mus_EnCorrespondencia_CEP').editable('setValue', cep);
 
-            var logradouro = $('#En_Nome_Logradouro').editable('getValue', true);
-            $('#mus_EnCorrespondencia_Nome_Logradouro').editable('setValue', logradouro);
+                var logradouro = $('#En_Nome_Logradouro').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Nome_Logradouro').editable('setValue', logradouro);
 
-            var numero = $('#En_Num').editable('getValue', true);
-            $('#mus_EnCorrespondencia_Num').editable('setValue', numero);
+                var numero = $('#En_Num').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Num').editable('setValue', numero);
 
-            var complemento = $('#En_Complemento').editable('getValue', true);
-            $('#mus_EnCorrespondencia_Complemento').editable('setValue', complemento);
+                var complemento = $('#En_Complemento').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Complemento').editable('setValue', complemento);
 
-            var bairro = $('#En_Bairro').editable('getValue', true);
-            $('#mus_EnCorrespondencia_Bairro').editable('setValue', bairro);
+                var bairro = $('#En_Bairro').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Bairro').editable('setValue', bairro);
 
-            var municipio = $('#En_Municipio').editable('getValue', true);
-            $('#mus_EnCorrespondencia_Municipio').editable('setValue', municipio);
+                var municipio = $('#En_Municipio').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Municipio').editable('setValue', municipio);
 
-            var estado = $('#En_Estado').editable('getValue', true);
-            $('#mus_EnCorrespondencia_Estado').editable('setValue', estado);
+                var estado = $('#En_Estado').editable('getValue', true);
+                $('#mus_EnCorrespondencia_Estado').editable('setValue', estado);
+            }
         }
     }
 
