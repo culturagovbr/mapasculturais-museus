@@ -1103,10 +1103,13 @@ class Theme extends BaseMinc\Theme {
           return $filters;
       }
 
-    protected function checkSealRegistro(){
-        $dql = "SELECT COUNT(e) FROM \MapasCulturais\Entities\SpaceSealRelation e WHERE e.seal = " . App::i()->config['museus.sealRegistroMuseu'] . " AND e.objectId = " . $this->data->entity->id;
-        $query = App::i()->em->createQuery($dql);
+    protected function checkSealRegistro() {
+        if (array_key_exists('museus.sealRegistroMuseu', App::i()->config) && is_numeric($this->data->entity->id)) {
+            $selo_museu = App::i()->config['museus.sealRegistroMuseu'];
+            $dql = 'SELECT COUNT(e) FROM \MapasCulturais\Entities\SpaceSealRelation e WHERE e.seal = ' . $selo_museu . ' AND e.objectId = ' . $this->data->entity->id;
+            $query = App::i()->em->createQuery($dql);
 
-        return $query->getSingleScalarResult();
+            return $query->getSingleScalarResult();
+        }
     }
 }
