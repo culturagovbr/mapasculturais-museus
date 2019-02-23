@@ -10,9 +10,13 @@ use Doctrine\ORM\Query\ResultSetMapping;
 
 class Theme extends BaseMinc\Theme {
 
+    private $selosCustom = ['cadastrado' => 'Museu Cadastrado', 'registro' => 'Registro de Museus'];
+
     public function _init() {
         $app = App::i();
         $_self = $this;
+        $selosCustom = $this->selosCustom;
+
         $app->registerController('registromuseus', 'MapasMuseus\Controllers\RegistroMuseus');
 
         /*
@@ -265,7 +269,7 @@ class Theme extends BaseMinc\Theme {
         // });
 
         //Filtragem de museus por selos
-        $app->hook('search.filters', function(&$filters) use($app) {
+        $app->hook('search.filters', function(&$filters) use($app,$selosCustom) {
             //Seleciona todos os selos que iniciam com o nome 'Formulário de Visitação Anual - '
             $dql = "SELECT u FROM MapasCulturais\Entities\Seal u WHERE u.name LIKE 'Formulário de Visitação Anual - %' ORDER BY u.name";
 
@@ -278,10 +282,7 @@ class Theme extends BaseMinc\Theme {
             }
 
             $seals = \MapasCulturais\App::i()->repo('Seal')->findBy(array('name' => array_merge($sealsFvas,array(
-                        'Registro de Museus',
-                        'Museu Cadastrado'
-                    ))
-                )
+                    $selosCustom['registro'], $selosCustom['cadastrado'])))
             );
 
             $seal_filter = [
@@ -299,8 +300,8 @@ class Theme extends BaseMinc\Theme {
             ];
             
             foreach($seals as $seal) {
-                if($seal->name != 'Registro de Museus'){
-                    if($seal->name == 'Museu Cadastrado')
+                if($seal->name != $selosCustom['registro']){
+                    if($seal->name == $selosCustom['cadastrado'])
                         $second_seal = ['value' => $seal->id, 'label' => $seal->name];
                     else
                         $seal_filter['options'][] = ['value' => $seal->id, 'label' => $seal->name];
@@ -321,15 +322,14 @@ class Theme extends BaseMinc\Theme {
 
         $this->enqueueScript('app', 'modal-museu', 'js/modal-museu.js');
     }
-
-
+    
     private function getIBRAMSeals($app) {
         $dql = "SELECT u FROM MapasCulturais\Entities\Seal u WHERE u.name LIKE 'Formulário de Visitação Anual - %' ORDER BY u.name";
         $query = $app->em->createQuery($dql);
         $selosFVA = $query->getResult();
 
-        $registro_museus = $app->repo('Seal')->findBy(['name'=>'Registro de Museus']);
-        $museu_cadastrado = $app->repo('Seal')->findBy(['name'=>'Museu Cadastrado']);
+        $registro_museus  = $app->repo('Seal')->findBy(['name'=> $this->selosCustom['registro']]);
+        $museu_cadastrado = $app->repo('Seal')->findBy(['name'=> $this->selosCustom['cadastrado']]);
 
         if (is_array($registro_museus) && !empty($registro_museus) && $registro_museus[0] instanceof \MapasCulturais\Entities\Seal)
             $selosFVA[] = $registro_museus[0];
